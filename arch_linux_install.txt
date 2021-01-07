@@ -1,0 +1,52 @@
+# Tasks in order
+1. set keyboard
+2. verify boot mode
+3. update mirrors
+4. check connection
+#5. set locale, timezone and ntp/clock
+5. prepare drives: partition, make fs, swap, format, mount 
+6. install options
+7. select the mirrors
+8. install essential packages
+9. fstab
+10. chroot
+11. time zone
+12. set locale
+13. set network and hostname configs
+14. initramfs
+15. root password
+16. boot loader
+17. add sudo, add sudo user, git, gnupg, ssh, yay, pamac,
+pamac-tray, etc
+18. install xorg and desktops and basic software
+19. install desktop added software
+20. reboot system
+
+########  AFTER INSTALL ###########
+1. copy dotfiles and vim subdirs
+2. scp -r Music, public_html, sounds, .gkrellm2, wallpaper, wallpaper1,
+bin, .ssh, .gnupg
+3. make tmp repos adm build 
+4. install yay, gnome-terminal-transparency, chrome-stable, libdvd
+libcss libdvdread gkrellm mlocate
+5. install nodejs gvim powerline powerline-fonts nvm
+
+##########################
+##    Ideas for Future
+##########################
+
+Decide whether to keep this curses based or turn it into a graphical app
+like the Zen Installer
+
+Investigate whether to use other disk partitioning methods besides cfdisk
+
+Try to give the user a choice between available drives
+
+Try creating partitions programatically instead of with cfdisk
+
+The script needs to be more resiliant to bad input from user.  Figure out
+how to do that better.
+
+Find a way to implement the sshpass program with arch-chroot.  Possible?
+
+

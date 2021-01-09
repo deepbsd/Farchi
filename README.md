@@ -85,8 +85,8 @@ to recursively copy are installed in here.  Also, I install the AUR helper _yay_
 script.  I also install _google-chrome_ and a few other things.  Hopefully this script
 will give you ideas for your installations.
 
-_farchi\_target.sh_ is in case you want to save the default values in _farchi.sh_ and
-keep _farchi\_target.sh_ as your specific file to modify and test your ideas with.
+_farchi\_target.sh_ is in case you want to keep _farchi.sh_ pristine as an example only,
+and then you can customize _farchi\_target.sh_ just for your specific installation.
 
 _arch\_linux\_install.txt_ is a basic summary of the tasks needed to install an Arch
 system.

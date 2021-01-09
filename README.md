@@ -64,12 +64,11 @@ Associative arrays are
 
 Functions are
 ```
-func\_name(){
+func_name(){
     do something
-    return 0 if successful or non-zero if unsuccessful
+    returns 0 if successful or non-zero if unsuccessful
 }
 
 ```
-
 And about a million other little tiny rules that still bite me in the butt every day.
 Hope you have fun!

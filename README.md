@@ -60,17 +60,17 @@ Array names are  `ARRAY=( pkg1 pkg2 pkg3 )`
 
 Associative arrays are
 
-`ASSOC\_ARRAY=( [key1]=value1 [key2]=value2 [key3]=value3 )`
+`ASSOC_ARRAY=( [key1]=value1 [key2]=value2 [key3]=value3 )`
 
 Functions are
 
-"""
+```
 func\_name(){
     do something
     return 0 if successful or non-zero if unsuccessful
 }
 
-"""
+```
 
 And about a million other little tiny rules that still bite me in the butt every day.
 Hope you have fun!

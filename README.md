@@ -30,10 +30,12 @@ You'll need to customize settings for your installation.
 5. Whether you want BCM4360 Wifi Drivers or not (or some other drivers of your choosing)
 
 6. Your Video chipset driver to run X11.  This will be one of the _xf86-video-*_ drivers
-   for different video chipsets, such as Radeon, Nvidia, Intel, and so forth.
+   for different video chipsets, such as Radeon, Nvidia, Intel, and so forth. I install
+   xf86-video-vmware by default.
 
 7. Do you want to install X11 or not (faster if you don't, but you'll probably want to
-   install it anyway)
+   install it anyway).  If you're just experimenting in a VM and testing your script,
+   perhaps you just want to install a bare bones installation to test with.
 
 8. What desktop environment to you want (or what Window Manager)? I chose lightdm for
    display manager and Cinnamon for desktop environment by default.  XFCE and Mate and
@@ -58,18 +60,17 @@ Array names are  `ARRAY=( pkg1 pkg2 pkg3 )`
 
 Associative arrays are
 
-'''
-ASSOC\_ARRAY=( [key1]=value1 [key2]=value2 [key3]=value3 )
-'''
+`ASSOC\_ARRAY=( [key1]=value1 [key2]=value2 [key3]=value3 )`
 
 Functions are
 
-'''
+"""
 func\_name(){
     do something
     return 0 if successful or non-zero if unsuccessful
 }
-'''
+
+"""
 
 And about a million other little tiny rules that still bite me in the butt every day.
 Hope you have fun!

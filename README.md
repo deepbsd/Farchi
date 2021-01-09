@@ -72,3 +72,23 @@ func_name(){
 ```
 And about a million other little tiny rules that still bite me in the butt every day.
 Hope you have fun!
+
+## More Notes
+
+If you decide to NOT install X11, there is an additional _install\_x.sh_ script.  The
+commands for installing X can be executed after a basic Arch install is running using
+this script.
+
+There is a _post\_install.sh_ script.  On my home network, I always have hosts that
+contain folders I need on my fresh new installation.  The names of the directories I need
+to recursively copy are installed in here.  Also, I install the AUR helper _yay_ in this
+script.  I also install _google-chrome_ and a few other things.  Hopefully this script
+will give you ideas for your installations.
+
+_farchi\_target.sh_ is in case you want to save the default values in _farchi.sh_ and
+keep _farchi\_target.sh_ as your specific file to modify and test your ideas with.
+
+_arch\_linux\_install.txt_ is a basic summary of the tasks needed to install an Arch
+system.
+
+

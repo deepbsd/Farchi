@@ -63,7 +63,6 @@ Associative arrays are
 `ASSOC_ARRAY=( [key1]=value1 [key2]=value2 [key3]=value3 )`
 
 Functions are
-
 ```
 func\_name(){
     do something

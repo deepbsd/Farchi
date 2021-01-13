@@ -131,6 +131,42 @@ multimedia_stuff=( brasero sox cheese eog shotwell imagemagick sox cmus mpg123 a
 # All purpose error
 error(){ echo "Error: $1" && exit 1; }
 
+show_prefs(){
+    echo "Here are your preferences that will be installed: "
+    echo "HOSTNAME: ${HOSTNAME}  INSTALLATION DRIVE: ${IN_DEVICE}  DISKLABEL: ${DISKLABEL}"
+    echo "TIMEZONE: ${TIME_ZONE}   LOCALE:  ${LOCALE}"
+
+    if $(efi_boot_mode); then
+        echo "ROOT_SIZE: ${ROOT_SIZE} on ${ROOT_DEVICE}"
+        echo "EFI_SIZE: ${EFI_SIZE} on ${EFI_DEVICE}"
+        echo "SWAP_SIZE: ${SWAP_SIZE} on ${SWAP_DEVICE}"
+        echo "HOME_SIZE: Occupying rest of ${HOME_DEVICE}"
+    else
+        echo "ROOT_SIZE: ${ROOT_SIZE} on ${ROOT_DEVICE}"
+        echo "BOOT_SIZE: ${BOOT_SIZE} on ${BOOT_DEVICE}"
+        echo "SWAP_SIZE: ${SWAP_SIZE} on ${SWAP_DEVICE}"
+        echo "HOME_SIZE: Occupying rest of ${HOME_DEVICE}"
+    fi
+
+    if $(use_lvm); then
+        echo "We ARE using LVM"
+    else
+        echo "We ARE NOT using LVM"
+    fi
+
+    if $(install_x); then 
+        echo "We ARE installing X with driver: ${VIDEO_DRIVER}"
+        card=$(lspci | grep VGA | sed 's/^.*: //g')
+        echo "You're using a $card" && echo
+    else
+        echo "We ARE NOT installing X "
+    fi
+
+
+    echo "Type any key to continue or CTRL-C to exit..."
+    read empty
+}
+
 # FIND GRAPHICS CARD
 find_card(){
     card=$(lspci | grep VGA | sed 's/^.*: //g')

@@ -24,8 +24,8 @@ use_bcm4360() { return 1; }  # return 0 if you want bcm4360
 # Change according to your taste!
 HOSTNAME="marbie1"
 
-# Don't change this.  If you have an EFI motherboard, your going to use
-# a GPT disktable, or an MBR disktable otherwise.
+# Don't change this.  If you have a fully compliant UEFI motherboard, you're going
+# to use a GPT disktable, or an MBR disktable otherwise.
 ( $(efi_boot_mode) && DISKTABLE="GPT" ) || DISKTABLE="MBR"
 
 # Change if not installing to a VM

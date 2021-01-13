@@ -54,7 +54,7 @@ you just set the variable equal to the name of the package that you want.
 
 ## Basic BASH Syntax
 
-Variables are set as `VARIABLE\_NAME=value`
+Variables are set as `VARIABLE_NAME=value`
 
 Array names are  
 

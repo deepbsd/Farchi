@@ -27,7 +27,7 @@ HOSTNAME="peanut"
 VIDEO_DRIVER="xf86-video-nouveau"
 
 # DISK DEVICES and SLICES
-IN_DEVICE=/dev/sdc
+IN_DEVICE=/dev/sdb
 
 if [[ "$DISKTABLE" =~ 'GPT' && $(efi_boot_mode) ]] ; then
     EFI_DEVICE="${IN_DEVICE}1"   # NOT for MBR systems
@@ -64,21 +64,29 @@ if $(use_lvm) ; then
     LV_SWAP="ArchSwap"
 fi
 
-# PARTITION SIZES
-( $(efi_boot_mode) && EFI_SIZE=512M ) || unset EFI_SIZE
-#( !$(efi_boot_mode) && BOOT_SIZE=512M ) || unset BOOT_SIZE
-BOOT_SIZE=512M
-SWAP_SIZE=64G
+################ PARTITION SIZES ##################
+###################################################
+
+if $(efi_boot_mode) ; then
+    EFI_SIZE=512M
+    EFI_MTPT=/mnt/boot/efi
+    unset BOOT_SIZE
+else
+    unset EFI_SIZE; unset EFI_MTPT
+    BOOT_SIZE=512M
+fi
+
+## Change these for YOUR installation.  I'm using a 30G VM
+SWAP_SIZE=32G
 ROOT_SIZE=100G
 HOME_SIZE=    # Take whatever is left over after other partitions
 
-( $(efi_boot_mode) && EFI_MTPT=/mnt/boot/efi ) || unset EFI_MTPT
+#( $(efi_boot_mode) && EFI_MTPT=/mnt/boot/efi ) || unset EFI_MTPT
 TIME_ZONE="America/New_York"
 LOCALE="en_US.UTF-8"
 FILESYSTEM=ext4
 DESKTOP=('cinnamon' 'nemo-fileroller' 'lightdm-gtk-greeter')
 declare -A DISPLAY_MGR=( [dm]='lightdm' [service]='lightdm.service' )
-
 
 if $(use_bcm4360) ; then
     WIRELESSDRIVERS="broadcom-wl-dkms"

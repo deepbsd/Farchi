@@ -55,12 +55,14 @@ else
     HOME_DEVICE="${IN_DEVICE}4"  # only for non-LVM
 fi
 
-# VOLUME GROUPS
-PV_DEVICE="$ROOT_DEVICE"
-VOL_GROUP="arch_vg"
-LV_ROOT="ArchRoot"
-LV_HOME="ArchHome"
-LV_SWAP="ArchSwap"
+if $(use_lvm) ; then
+    # VOLUME GROUPS  (Probably should unset SWAP_DEVICE and HOME_DEVICE)
+    PV_DEVICE="$ROOT_DEVICE"
+    VOL_GROUP="arch_vg"
+    LV_ROOT="ArchRoot"
+    LV_HOME="ArchHome"
+    LV_SWAP="ArchSwap"
+fi
 
 # PARTITION SIZES
 ( $(efi_boot_mode) && EFI_SIZE=512M ) || unset EFI_SIZE

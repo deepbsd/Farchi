@@ -56,7 +56,9 @@ you just set the variable equal to the name of the package that you want.
 
 Variables are set as VARIABLE\_NAME=value
 
-Array names are  `ARRAY=( pkg1 pkg2 pkg3 )`
+Array names are  
+
+`ARRAY=( pkg1 pkg2 pkg3 )`
 
 Associative arrays are
 

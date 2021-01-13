@@ -334,6 +334,9 @@ echo "Testing internet connection..."
 $(ping -c 3 archlinux.org &>/dev/null) || (echo "Not Connected to Network!!!" && exit 1)
 echo "Good!  We're connected!!!" && sleep 3
 
+## SHOW THE PREFERENCES BEFORE STARTING INSTALLATION
+## Last chance for user to doublecheck his preferences
+show_prefs
 
 ## CHECK TIME AND DATE BEFORE INSTALLATION
 timedatectl set-ntp true

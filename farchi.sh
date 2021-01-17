@@ -26,7 +26,7 @@ HOSTNAME="marbie1"
 
 # Don't change this.  If you have a fully compliant UEFI motherboard, you're going
 # to use a GPT disktable, or an MBR disktable otherwise.
-( $(efi_boot_mode) && DISKTABLE="GPT" ) || DISKTABLE="MBR"
+( $(efi_boot_mode) && DISKLABEL="GPT" ) || DISKLABEL="MBR"
 
 # Change if not installing to a VM
 VIDEO_DRIVER="xf86-video-vmware"
@@ -37,7 +37,7 @@ IN_DEVICE=/dev/sda
 
 # If IN_DEV is nvme then slices are p1, p2 etc
 if  $(efi_boot_mode) ; then
-    DISKTABLE='GPT'
+    DISKLABEL='GPT'
     EFI_MTPT=/mnt/boot/efi
     if [[ $IN_DEVICE =~ nvme ]]; then
         EFI_DEVICE="${IN_DEVICE}p1"   # NOT for MBR systems
@@ -53,7 +53,7 @@ if  $(efi_boot_mode) ; then
 else
     # Any mobo with nvme probably is gonna be EFI I'm thinkin...
     # Probably no non-UEFI mobos with nvme drives
-    DISKTABLE='MBR'
+    DISKLABEL='MBR'
     unset EFI_DEVICE
     BOOT_DEVICE="${IN_DEVICE}1"
     BOOT_MTPT=/mnt/boot

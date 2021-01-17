@@ -22,14 +22,14 @@ use_bcm4360() { return 1; }  # return 0 if you want bcm4360
 
 HOSTNAME="peanut"
 
-( $(efi_boot_mode) && DISKTABLE="GPT" ) || DISKTABLE="MBR"
+( $(efi_boot_mode) && DISKLABEL="GPT" ) || DISKLABEL="MBR"
 
 VIDEO_DRIVER="xf86-video-nouveau"
 
 # DISK DEVICES and SLICES
 IN_DEVICE=/dev/sdb
 
-if [[ "$DISKTABLE" =~ 'GPT' && $(efi_boot_mode) ]] ; then
+if [[ "$DISKLABEL" =~ 'GPT' && $(efi_boot_mode) ]] ; then
     EFI_DEVICE="${IN_DEVICE}1"   # NOT for MBR systems
     EFI_MTPT=/mnt/boot/efi
     if [[ $IN_DEVICE =~ nvme ]]; then
@@ -46,7 +46,7 @@ if [[ "$DISKTABLE" =~ 'GPT' && $(efi_boot_mode) ]] ; then
 else
     # Any mobo with nvme probably is gonna be EFI I'm thinkin...
     # Probably no non-UEFI mobos with nvme drives
-    DISKTABLE='MBR'
+    DISKLABEL='MBR'
     unset EFI_DEVICE
     BOOT_DEVICE="${IN_DEVICE}1"
     BOOT_MTPT=/mnt/boot

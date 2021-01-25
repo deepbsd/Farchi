@@ -328,7 +328,6 @@ EOF
 
     lsblk
     echo "LVs created and mounted. Press any key."; read empty;
-    startmenu
 }
 
 

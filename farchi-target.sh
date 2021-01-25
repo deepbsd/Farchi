@@ -296,23 +296,33 @@ EOF
     # activate the vol group
     vgchange -ay
     
-    format_it "$BOOT_DEVICE" "$FILESYSTEM"
+    # Format either the EFI_DEVICE or the BOOT_DEVICE
+    if $(efi_boot_mode) ; then
+        mkfs.fat -F32 "$EFI_DEVICE"
+    else
+        format_it "$BOOT_DEVICE" "$FILESYSTEM"
+    fi
+
+    # Format the VG members
     format_it /dev/"$VOL_GROUP"/"$LV_ROOT" "$FILESYSTEM"
     format_it /dev/"$VOL_GROUP"/"$LV_HOME" "$FILESYSTEM"
+
     # mount the volumes
     mount_it /dev/"$VOL_GROUP"/"$LV_ROOT" /mnt
-    mkdir /mnt/boot
-    mount_it "$BOOT_DEVICE" /mnt/boot
     mkdir /mnt/home
     mount_it /dev/"$VOL_GROUP"/"$LV_HOME" /mnt/home
-    # mount the EFI partition
+
+    # Mount either the EFI or BOOT partition
     if $(efi_boot_mode) ; then
         mkdir /mnt/boot && mkdir /mnt/boot/efi
         mount_it "$EFI_DEVICE" "$EFI_MTPT"
+    else
+        mkdir /mnt/boot
+        mount_it "$BOOT_DEVICE" /mnt/boot
     fi
+
     lsblk
     echo "LVs created and mounted. Press any key."; read empty;
-    startmenu
 }
 
 

@@ -20,14 +20,16 @@ use_lvm(){ return 0; }       # return 0 if you want lvm
 use_crypt(){ return 1; }     # return 0 if you want crypt (NOT IMPLEMENTED YET)
 use_bcm4360() { return 1; }  # return 0 if you want bcm4360
 
-HOSTNAME="peanut"
+HOSTNAME="archisobox"
 
 ( $(efi_boot_mode) && DISKLABEL="GPT" ) || DISKLABEL="MBR"
 
 VIDEO_DRIVER="xf86-video-nouveau"
 
-# DISK DEVICES and SLICES
-IN_DEVICE=/dev/sdb
+#############################################################
+##############    DISK DEVICES and SLICES   #################
+#############################################################
+IN_DEVICE=/dev/sda
 
 if [[ "$DISKLABEL" =~ 'GPT' && $(efi_boot_mode) ]] ; then
     EFI_DEVICE="${IN_DEVICE}1"   # NOT for MBR systems
@@ -64,6 +66,7 @@ if $(use_lvm) ; then
     LV_SWAP="ArchSwap"
 fi
 
+###################################################
 ################ PARTITION SIZES ##################
 ###################################################
 
@@ -82,6 +85,11 @@ ROOT_SIZE=100G
 HOME_SIZE=    # Take whatever is left over after other partitions
 
 #( $(efi_boot_mode) && EFI_MTPT=/mnt/boot/efi ) || unset EFI_MTPT
+
+#############################################################################
+######     TIMEZONE, LOCALE, KEYBOARD (assumes US), and DESKTOP ENVIRONMENT
+######     WIFI DRIVER, DISPLAY MGR
+#############################################################################
 TIME_ZONE="America/New_York"
 LOCALE="en_US.UTF-8"
 FILESYSTEM=ext4

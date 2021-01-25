@@ -188,12 +188,12 @@ find_card(){
 
 format_it(){
     device=$1; fstype=$2
-    mkfs."$fstype" "$device" || exit 1
+    mkfs."$fstype" "$device" || error "can't format $device with $fstype"
 }
 
 mount_it(){
     device=$1; mt_pt=$2
-    mount "$device" "$mt_pt" || exit 1
+    mount "$device" "$mt_pt" || error "can't mount $device on $mt_pt"
 }
 
 non_lvm_create(){
@@ -263,7 +263,7 @@ lvm_create(){
         sgdisk -n 1::+"$EFI_SIZE" -t 1:ef00 -c 1:EFI "$IN_DEVICE"
         sgdisk -n 2 -t 2:8e00 -c 2:VOLGROUP "$IN_DEVICE"
         # Format
-        format_it "$EFI_DEVICE" "fat -F32"
+        mkfs.fat -F32 "$EFI_DEVICE"
     else
         #  # Create the slice for the Volume Group as first and only slice
 

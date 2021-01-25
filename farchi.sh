@@ -193,7 +193,7 @@ find_card(){
 
 format_it(){
     device=$1; fstype=$2
-    mkfs."$fstype" "$device" || error "format_it(): Can't format device $device"
+    mkfs."$fstype" "$device" || error "format_it(): Can't format device $device with $fstype"
 }
 
 mount_it(){

@@ -19,8 +19,13 @@ install_x()( return 0; )       # return 0 if you want to install X
 use_lvm(){ return 0; }       # return 0 if you want lvm
 use_crypt(){ return 1; }     # return 0 if you want crypt (NOT IMPLEMENTED YET)
 use_bcm4360() { return 1; }  # return 0 if you want bcm4360
+use_nonus_keymap(){ return 1; } # return 0 if using non-US keyboard keymap (default)
+default_keymap='us'             # set to your keymap name
 
-HOSTNAME="archisobox"
+$(use_nonus_keymap()) && loadkeys "${default_keymap}"
+
+# Change according to your taste!
+HOSTNAME="archie1"
 
 ( $(efi_boot_mode) && DISKLABEL="GPT" ) || DISKLABEL="MBR"
 
@@ -86,10 +91,10 @@ HOME_SIZE=    # Take whatever is left over after other partitions
 
 #( $(efi_boot_mode) && EFI_MTPT=/mnt/boot/efi ) || unset EFI_MTPT
 
-#############################################################################
-######     TIMEZONE, LOCALE, KEYBOARD (assumes US), and DESKTOP ENVIRONMENT
-######     WIFI DRIVER, DISPLAY MGR
-#############################################################################
+##########################################################
+######     TIMEZONE, LOCALE, KEYBOARD (assumes US),   ####
+######     DESKTOP, WIFI DRIVER                       ####
+##########################################################
 TIME_ZONE="America/New_York"
 LOCALE="en_US.UTF-8"
 FILESYSTEM=ext4
@@ -164,6 +169,7 @@ show_prefs(){
 
     if $(install_x); then 
         echo "We ARE installing X with driver: ${VIDEO_DRIVER}"
+        echo "We are using ${DISPLAY_MGR[dm]} with ${DESKTOP[@]}"
         card=$(lspci | grep VGA | sed 's/^.*: //g')
         echo "You're using a $card" && echo
     else

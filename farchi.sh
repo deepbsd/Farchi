@@ -20,6 +20,10 @@ install_x(){ return 0; }     # return 0 if you want to install X
 use_lvm(){ return 0; }       # return 0 if you want lvm
 use_crypt(){ return 1; }     # return 0 if you want crypt (NOT IMPLEMENTED YET)
 use_bcm4360() { return 1; }  # return 0 if you want bcm4360
+use_nonus_keymap(){ return 1; } # return 0 if using non-US keyboard keymap (default)
+default_keymap='us'             # set to your keymap name
+
+$(use_nonus_keymap()) && loadkeys "${default_keymap}"
 
 # Change according to your taste!
 HOSTNAME="marbie1"
@@ -31,7 +35,10 @@ HOSTNAME="marbie1"
 # Change if not installing to a VM
 VIDEO_DRIVER="xf86-video-vmware"
 
-# DISK DEVICES and SLICES
+###################################################
+################ PARTITION SIZES ##################
+###################################################
+
 IN_DEVICE=/dev/sda
 #IN_DEVICE=/dev/nvme0n0
 
@@ -88,7 +95,11 @@ SWAP_SIZE=2G
 ROOT_SIZE=13G
 HOME_SIZE=    # Take whatever is left over after other partitions
 
-#( $(efi_boot_mode) && EFI_MTPT=/mnt/boot/efi ) || unset EFI_MTPT
+####################################################
+####   LOCALE, TIMEZONE, FILESYSTEM, DESKTOP ENV,
+####   DISPLAY MGR, WIFI DRIVER
+####################################################
+
 TIME_ZONE="America/New_York"
 LOCALE="en_US.UTF-8"
 FILESYSTEM=ext4
@@ -164,12 +175,12 @@ show_prefs(){
 
     if $(install_x); then 
         echo "We ARE installing X with driver: ${VIDEO_DRIVER}"
+        echo "We are using ${DISPLAY_MGR[dm]} with ${DESKTOP[@]}"
         card=$(lspci | grep VGA | sed 's/^.*: //g')
         echo "You're using a $card" && echo
     else
         echo "We ARE NOT installing X "
     fi
-
 
     echo "Type any key to continue or CTRL-C to exit..."
     read empty

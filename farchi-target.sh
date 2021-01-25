@@ -209,7 +209,7 @@ non_lvm_create(){
         # Format and mount slices for EFI
         format_it "$ROOT_DEVICE" "$FILESYSTEM"
         mount_it "$ROOT_DEVICE" /mnt
-        format_it "$EFI_DEVICE" 'fat -F32'
+        format_it "$EFI_DEVICE" "fat -F32"
         mkdir /mnt/boot && mkdir /mnt/boot/efi
         mount_it "$EFI_DEVICE" "$EFI_MTPT"
         format_it "$HOME_DEVICE" "$FILESYSTEM"

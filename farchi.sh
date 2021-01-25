@@ -30,7 +30,6 @@ HOSTNAME="marbie1"
 
 # Don't change this.  If you have a fully compliant UEFI motherboard, you're going
 # to use a GPT disktable, or an MBR disktable otherwise.
-( $(efi_boot_mode) && DISKLABEL="GPT" ) || DISKLABEL="MBR"
 
 # Change if not installing to a VM
 VIDEO_DRIVER="xf86-video-vmware"
@@ -83,11 +82,11 @@ fi
 
 if $(efi_boot_mode) ; then
     EFI_SIZE=512M
-    EFI_MTPT=/mnt/boot/efi
+    #EFI_MTPT=/mnt/boot/efi
     unset BOOT_SIZE
 else
     unset EFI_SIZE; unset EFI_MTPT
-    BOOT_SIZE=512M
+    #BOOT_SIZE=512M
 fi
 
 ## Change these for YOUR installation.  I'm using a 30G VM

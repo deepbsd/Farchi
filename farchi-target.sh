@@ -27,8 +27,6 @@ $(use_nonus_keymap()) && loadkeys "${default_keymap}"
 # Change according to your taste!
 HOSTNAME="archie1"
 
-( $(efi_boot_mode) && DISKLABEL="GPT" ) || DISKLABEL="MBR"
-
 VIDEO_DRIVER="xf86-video-nouveau"
 
 #############################################################
@@ -36,7 +34,8 @@ VIDEO_DRIVER="xf86-video-nouveau"
 #############################################################
 IN_DEVICE=/dev/sda
 
-if [[ "$DISKLABEL" =~ 'GPT' && $(efi_boot_mode) ]] ; then
+if $(efi_boot_mode) ; then
+    DISKLABEL='GPT'
     EFI_DEVICE="${IN_DEVICE}1"   # NOT for MBR systems
     EFI_MTPT=/mnt/boot/efi
     if [[ $IN_DEVICE =~ nvme ]]; then
@@ -77,7 +76,7 @@ fi
 
 if $(efi_boot_mode) ; then
     EFI_SIZE=512M
-    EFI_MTPT=/mnt/boot/efi
+    #EFI_MTPT=/mnt/boot/efi
     unset BOOT_SIZE
 else
     unset EFI_SIZE; unset EFI_MTPT

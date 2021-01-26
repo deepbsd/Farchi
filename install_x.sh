@@ -4,8 +4,12 @@
 
 install_x(){ return 0; }     # return 0 if you want to install X
 
+VIDEO_DRIVER="xf86-video-vmware"
+DESKTOP=('cinnamon' 'nemo-fileroller' 'lightdm-gtk-greeter')
+declare -A DISPLAY_MGR=( [dm]='lightdm' [service]='lightdm.service' )
+
 ## These are packages required for a working Xorg desktop (My preferences anyway)
-BASIC_X=( xorg-server xorg-xinit mesa xorg-twm xterm gnome-terminal xfce4-terminal xorg-xclock "${DESKTOP[@]}" ${DISPLAY_MGR[dm]} firefox )
+BASIC_X=( xorg-server xorg-xinit mesa xorg-twm xterm gnome-terminal xfce4-terminal xorg-xclock "${DESKTOP[@]}" "${DISPLAY_MGR[dm]}" firefox )
 
 ## These are your specific choices for fonts and wallpapers and X-related goodies
 EXTRA_X=( adobe-source-code-pro-fonts cantarell-fonts gnu-free-fonts noto-fonts breeze-gtk breeze-icons oxygen-gtk2 gtk-engine-murrine oxygen-icons xcursor-themes adapta-gtk-theme arc-gtk-theme elementary-icon-theme faenza-icon-theme gnome-icon-theme-extras arc-icon-theme lightdm-gtk-greeter-settings lightdm-webkit-theme-litarvan mate-icon-theme materia-gtk-theme papirus-icon-theme xcursor-bluecurve xcursor-premium archlinux-wallpaper deepin-community-wallpapers deepin-wallpapers elementary-wallpapers )
@@ -28,7 +32,6 @@ printing_stuff=( system-config-printer foomatic-db foomatic-db-engine gutenprint
 
 multimedia_stuff=( brasero sox cheese eog shotwell imagemagick sox cmus mpg123 alsa-utils cheese )
 
-
 ##########################################
 ######       FUNCTIONS       #############
 ##########################################
@@ -42,21 +45,19 @@ find_card(){
     echo "You're using a $card" && echo
 }
 
-
-
 ## INSTALL X AND DESKTOP  
 if $(install_x); then
     clear && echo "Installing X and X Extras and Video Driver. Type any key to continue"; read empty
-    arch-chroot /mnt pacman -S "${BASIC_X[@]}"
-    arch-chroot /mnt pacman -S "${EXTRA_X[@]}"
+    pacman -S "${BASIC_X[@]}"
+    pacman -S "${EXTRA_X[@]}"
     your_card=$(find_card)
     echo "${your_card} and you're installing the $VIDEO_DRIVER driver... (Type key to continue) "; read blah
-    arch-chroot /mnt pacman -S "$VIDEO_DRIVER"
-    arch-chroot /mnt pacman -S "${EXTRA_DESKTOPS[@]}"
-    arch-chroot /mnt pacman -S "${GOODIES[@]}"
+    pacman -S "$VIDEO_DRIVER"
+    pacman -S "${EXTRA_DESKTOPS[@]}"
+    pacman -S "${GOODIES[@]}"
 
     echo "Enabling display manager service..."
-    arch-chroot /mnt systemctl enable ${DISPLAY_MGR[service]}
+    systemctl enable ${DISPLAY_MGR[service]}
     echo && echo "Your desktop and display manager should now be installed..."
     sleep 5
 fi

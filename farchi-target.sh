@@ -488,7 +488,7 @@ clear
 echo "Installing grub..." && sleep 4
 arch-chroot /mnt pacman -S grub os-prober
 
-if [[ $(efi_boot_mode) && -n $EFI_DEVICE ]]; then
+if $(efi_boot_mode) ; then
     arch-chroot /mnt pacman -S efibootmgr
     
     [[ ! -d /mnt/boot/efi ]] && error "Grub Install: no /mnt/boot/efi directory!!!" 

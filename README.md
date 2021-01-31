@@ -28,6 +28,8 @@ You'll need to customize settings for your installation.
    the future.
 
 5. Whether you want BCM4360 Wifi Drivers or not (or some other drivers of your choosing)
+   This is a chipset I often use in my PCI wifi devices.  It's a good one.  But you should install
+   the driver for your wifi device.
 
 6. Your Video chipset driver to run X11.  This will be one of the _xf86-video-*_ drivers
    for different video chipsets, such as Radeon, Nvidia, Intel, and so forth. I install
@@ -46,7 +48,7 @@ You'll need to customize settings for your installation.
 
 10. What packages you want.  I chose some default X11 goodies, printing utilities,
     multimedia packages, and some programming utilities.  I don't install Nano by
-    default, because I'm a Vim guy.  
+    default, because I'm a Vim guy.  But you should install what you want.
 
 The variables are set in the early part of the script.  Sometimes a value is set by
 whether a function returns a truthy value or not (0 for true, 1 for false).  Sometimes

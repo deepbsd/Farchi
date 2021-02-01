@@ -110,6 +110,9 @@ as I understand it.  Also, extra hooks must be added to `mkinitcpio.conf`.  Also
 using systemd init, apparently that's different from using GRUB.  Not sure which one is
 best for all this yet.  You have to pass some command line params at boot to the kernel.
 
+No released version of GRUB supports LUKS2.  Have to use LUKS1 on partitions that GRUB needs
+to access.
+
 ## LUKS on LVM vs LVM on LUKS
 
 You cannot span multiple disks if you're using LVM on LUKS.  However, you'll have to use

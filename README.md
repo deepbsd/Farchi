@@ -96,3 +96,16 @@ _arch\_linux\_install.txt_ is a basic summary of the tasks needed to install an 
 system.
 
 
+## On LUKS
+
+I'm beginning to look into encryption with Arch.  I'm just beginning to read up on it.
+What I've found so far is that it's probably best to first create the encrypted filesystem
+and *then* to create LVM onto it.  That way you don't have to create cryptographic keys for
+each physical volume and deal with the complexity of that arrangement, and the lack of
+protection also.  Your entries in `/dev/mapper` won't be encrypted, etc.  It's better to 
+add LVM *after* you first get the filesystem encrypted.
+
+
+
+
+

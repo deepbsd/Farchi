@@ -105,7 +105,10 @@ each physical volume and deal with the complexity of that arrangement, and the l
 protection also.  Your entries in `/dev/mapper` won't be encrypted, etc.  It's better to 
 add LVM *after* you first get the filesystem encrypted.
 
-
+BTW, the boot loader cannot be encrypted.  The EFI partition must be loaded unencrypted,
+as I understand it.  Also, extra hooks must be added to `mkinitcpio.conf`.  Also, if you're 
+using systemd init, apparently that's different from using GRUB.  Not sure which one is
+best for all this yet.  You have to pass some command line params at boot to the kernel.
 
 
 

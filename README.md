@@ -120,5 +120,9 @@ separate keys for separate physical volumes if you use LUKS on LVM, adding more
 complexity and less security to the mix.  I'm frankly not sure which method I want to use
 at this point...
 
+## simplest.sh
 
+This is a starter script for your own script.  It has the bare essentials for installing your own MBR-based
+installation.  The same "you'll need to change" fules apply.  But this is a simpler script to start
+with.  
 

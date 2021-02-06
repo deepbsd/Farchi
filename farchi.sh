@@ -232,8 +232,7 @@ EOF
 
 
         # Using sfdisk because we're talking MBR disktable now...
-        ### WHY AREN'T WE USING $IN_DEVICE VARIABLE??????
-        sfdisk /dev/sda < /tmp/sfdisk.cmd 
+        sfdisk "$IN_DEVICE" < /tmp/sfdisk.cmd 
 
         # Format and mount slices for non-EFI
         format_it "$ROOT_DEVICE" "$FILESYSTEM"

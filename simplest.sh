@@ -42,10 +42,14 @@ echo "Testing internet connection..."
 $(ping -c 3 archlinux.org &>/dev/null) || (echo "Not Connected to Network!!!" && exit 1)
 echo "Good!  We're connected!!!" && sleep 3
 
+## Check time and date before installation
+timedatectl set-ntp true
+echo && echo "Date/Time service Status is . . . "
+timedatectl status
+sleep 4
 
 ####  Just use cfdisk to partition drive
 #cfdisk "$IN_DEVICE"    # for non-EFI VM: /boot 512M; / 13G; Swap 2G; Home Remainder
-
 
 cat > /tmp/sfdisk.cmd << EOF
 $BOOT_DEVICE : start= 2048, size=+$BOOT_SIZE, type=83, bootable
@@ -54,19 +58,10 @@ $SWAP_DEVICE : size=+$SWAP_SIZE, type=82
 $HOME_DEVICE : type=83
 EOF
 
-
 # Using sfdisk because we're talking MBR disktable now...
 #sfdisk /dev/sda < /tmp/sfdisk.cmd 
 sfdisk "$IN_DEVICE" < /tmp/sfdisk.cmd 
 
-
-
-
-## Check time and date before installation
-timedatectl set-ntp true
-echo && echo "Date/Time service Status is . . . "
-timedatectl status
-sleep 4
 
 #####  Format filesystems
 mkfs.ext4 /dev/sda1    # /boot

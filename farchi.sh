@@ -277,7 +277,7 @@ $BOOT_DEVICE : start= 2048, size=+$BOOT_SIZE, type=83, bootable
 $ROOT_DEVICE : type=83
 EOF
         # Using sfdisk because we're talking MBR disktable now...
-        sfdisk /dev/sda < /tmp/sfdisk.cmd 
+        sfdisk "$IN_DEVICE" < /tmp/sfdisk.cmd 
     fi
     
     # create the physical volumes

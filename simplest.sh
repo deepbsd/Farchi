@@ -4,6 +4,10 @@
 HOSTNAME="marbie1"
 VIDEO_DRIVER="xf86-video-vmware"
 IN_DEVICE=/dev/sda
+BOOT_DEVICE="${IN_DEVICE}1"
+ROOT_DEVICE="${IN_DEVICE}2"
+SWAP_DEVICE="${IN_DEVICE}3"
+HOME_DEVICE="${IN_DEVICE}4"
 
 BOOT_SIZE=512M
 SWAP_SIZE=2G
@@ -62,18 +66,17 @@ EOF
 #sfdisk /dev/sda < /tmp/sfdisk.cmd 
 sfdisk "$IN_DEVICE" < /tmp/sfdisk.cmd 
 
-
 #####  Format filesystems
-mkfs.ext4 /dev/sda1    # /boot
-mkfs.ext4 /dev/sda2    # /
-mkswap /dev/sda3       # swap partition
-mkfs.ext4 /dev/sda4    # /home
+mkfs.ext4 "$BOOT_DEVICE"    # /boot
+mkfs.ext4 "$ROOT_DEVICE"    # /
+mkswap "$SWAP_DEVICE"       # swap partition
+mkfs.ext4 "$HOME_DEVICE"    # /home
 
 #### Mount filesystems
-mount /dev/sda2 /mnt
-mkdir /mnt/boot && mount /dev/sda1 /mnt/boot
-swapon /dev/sda3
-mkdir /mnt/home && mount /dev/sda4 /mnt/home
+mount "$ROOT_DEVICE" /mnt
+mkdir /mnt/boot && mount "$BOOT_DEVICE" /mnt/boot
+swapon "$SWAP_DEVICE"
+mkdir /mnt/home && mount "$HOME_DEVICE" /mnt/home
 
 ###  Install base system
 clear
@@ -152,7 +155,7 @@ arch-chroot /mnt passwd "$sudo_user"
 $(use_bcm4360) && arch-chroot /mnt pacman -S "$WIRELESSDRIVERS"
 [[ "$?" -eq 0 ]] && echo "Wifi Driver successfully installed!"; sleep 5
 
-## No X Today!!
+## Not installing X in this script...
 
 ## INSTALL GRUB
 clear

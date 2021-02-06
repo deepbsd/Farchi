@@ -64,6 +64,8 @@ EOF
 
 # Using sfdisk because we're talking MBR disktable now...
 #sfdisk /dev/sda < /tmp/sfdisk.cmd 
+
+## Nevermind!  Let's use sfdisk instead!
 sfdisk "$IN_DEVICE" < /tmp/sfdisk.cmd 
 
 #####  Format filesystems

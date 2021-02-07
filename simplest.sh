@@ -17,7 +17,7 @@ TIME_ZONE="America/New_York"
 LOCALE="en_US.UTF-8"
 FILESYSTEM=ext4
 
-use_bcm4360(){ return 0; }
+use_bcm4360(){ return 1; }
 
 if $(use_bcm4360) ; then
     WIRELESSDRIVERS="broadcom-wl-dkms"

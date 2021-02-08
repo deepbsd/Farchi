@@ -59,6 +59,12 @@ sleep 4
 ####  Could just use cfdisk to partition drive
 #cfdisk "$IN_DEVICE"    # for non-EFI VM: /boot 512M; / 13G; Swap 2G; Home Remainder
 
+###  NOTE: Drive partitioning is one of those highly customizable areas where your
+###        personal preferences and needs will dictate your choices.  Many options
+###        exist here.  An MBR disklabel is very old, limited, and may well inspire
+###        you to investigate other options, which is a good exercise.  But, MBR is pretty
+###        simple and reliable, within its constraints.  Bon voyage!
+
 # Using sfdisk because we're talking MBR disktable now...
 cat > /tmp/sfdisk.cmd << EOF
 $BOOT_DEVICE : start= 2048, size=+$BOOT_SIZE, type=83, bootable

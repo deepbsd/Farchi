@@ -56,9 +56,10 @@ echo && echo "Date/Time service Status is . . . "
 timedatectl status
 sleep 4
 
-####  Just use cfdisk to partition drive
+####  Could just use cfdisk to partition drive
 #cfdisk "$IN_DEVICE"    # for non-EFI VM: /boot 512M; / 13G; Swap 2G; Home Remainder
 
+# Using sfdisk because we're talking MBR disktable now...
 cat > /tmp/sfdisk.cmd << EOF
 $BOOT_DEVICE : start= 2048, size=+$BOOT_SIZE, type=83, bootable
 $ROOT_DEVICE : size=+$ROOT_SIZE, type=83
@@ -66,10 +67,6 @@ $SWAP_DEVICE : size=+$SWAP_SIZE, type=82
 $HOME_DEVICE : type=83
 EOF
 
-# Using sfdisk because we're talking MBR disktable now...
-#sfdisk /dev/sda < /tmp/sfdisk.cmd 
-
-## Nevermind!  Let's use sfdisk instead!
 sfdisk "$IN_DEVICE" < /tmp/sfdisk.cmd 
 
 #####  Format filesystems

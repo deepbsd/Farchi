@@ -8,6 +8,9 @@ mkdir tmp repos build
 echo "Download home directory files from what host on network?"; read whathost
 scp -Br dsj@"$whathost".lan:{adm,dotfiles,.vim,public_html,sounds,.gkrellm2,wallpaper,wallpaper1,bin,.ssh,.gnupg,Music} .
 
+## SYNC PACMAN DBs
+sudo pacman -Syy
+
 ## INSTALL DVD SUPPORT, GKRELLM, MLOCATE
 sudo pacman -S libdvdread libdvdcss libdvdnav gkrellm mlocate fzf
 

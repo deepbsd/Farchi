@@ -4,6 +4,10 @@
 
 install_x(){ return 0; }     # return 0 if you want to install X
 
+############################################
+###########     VARIABLES      #############
+############################################
+
 VIDEO_DRIVER="xf86-video-vmware"
 DESKTOP=('cinnamon' 'nemo-fileroller' 'lightdm-gtk-greeter')
 declare -A DISPLAY_MGR=( [dm]='lightdm' [service]='lightdm.service' )

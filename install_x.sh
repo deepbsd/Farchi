@@ -16,7 +16,7 @@ EXTRA_X=( adobe-source-code-pro-fonts cantarell-fonts gnu-free-fonts noto-fonts 
 
 EXTRA_DESKTOPS=( mate mate-extra xfce4 xfce4-goodies i3-gaps i3status i3blocks nitrogen feh rofi dmenu terminator ttf-font-awesome ttf-ionicons )
 
-GOODIES=( htop mlocate neofetch screenfetch powerline powerline-fonts powerline-vim )
+GOODIES=( htop mlocate neofetch screenfetch powerline powerline-fonts powerline-vim archlinux-wallpaper )
 
 ## -----------  Some of these are included, but it's all up to you...
 xfce_desktop=( xfce4 xfce4-goodies )

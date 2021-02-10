@@ -8,6 +8,8 @@ systemctl status systemd-homed
 
 [[ "$?" -eq 0 ]] && echo "Be sure to start and enable systemd-homed (as root) or else sudo will not work properly"
 
+echo "Also, reinstall pambase if necessary `pacman -S pambase`"
+
 ## PERSONAL DIRECTORIES AND RESOURCES
 echo "Making personal subdirectories..."
 mkdir tmp repos build 

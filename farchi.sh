@@ -28,9 +28,6 @@ $(use_nonus_keymap()) && loadkeys "${default_keymap}"
 # Change according to your taste!
 HOSTNAME="marbie1"
 
-# Don't change this.  If you have a fully compliant UEFI motherboard, you're going
-# to use a GPT disktable, or an MBR disktable otherwise.
-
 # Change if not installing to a VM
 VIDEO_DRIVER="xf86-video-vmware"
 

@@ -15,9 +15,10 @@ ROOT_SIZE=13G
 HOME_SIZE=    # Take whatever is left over after other partitions
 TIME_ZONE="America/New_York"
 LOCALE="en_US.UTF-8"
+#KEYBOARD="us"    # change if you need to
 FILESYSTEM=ext4
 
-use_bcm4360(){ return 1; }
+use_bcm4360(){ return 1; }  # return 0 for "truthy" and 1 for "falsy"
 
 if $(use_bcm4360) ; then
     WIRELESSDRIVERS="broadcom-wl-dkms"

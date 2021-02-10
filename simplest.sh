@@ -134,7 +134,7 @@ echo "/etc/hostname . . . "
 cat /mnt/etc/hostname 
 echo "/etc/hosts . . ."
 cat /mnt/etc/hosts
-echo && echo "Here are /etc/hostname and /etc/hosts. Type any key to continue "; read etchosts_yn
+echo && echo "Here are /etc/hostname and /etc/hosts. Type any key to continue "; read empty
 
 ## SET ROOT PASSWD
 clear

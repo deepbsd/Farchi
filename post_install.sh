@@ -31,7 +31,7 @@ ln -sf ~/dotfiles/.vimrc .
 # NVM
 mkdir $HOME/.nvm
 [[ -x $(which git &>/dev/null) ]] && cd && git clone https://github.com/nvm-sh/nvm.git .nvm/.
-[[ -d $HOME/.nvm ]] && cd ~/.nvm && source ./nvm.sh && cd
+[[ -d $HOME/.nvm ]] && cd ~/.nvm && source nvm.sh && cd
 
 ## INSTALL YAY  ## Do this last because of intermittant errors with yay-git
 echo "Installing yay: "

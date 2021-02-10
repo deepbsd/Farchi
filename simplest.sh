@@ -106,7 +106,7 @@ echo && echo "setting timezone to $TIME_ZONE..."
 arch-chroot /mnt ln -sf /usr/share/zoneinfo/"$TIME_ZONE" /etc/localtime
 arch-chroot /mnt hwclock --systohc --utc
 arch-chroot /mnt date
-echo && echo "Here's the date info, hit any key to continue..."; read td_yn
+echo && echo "Here's the date info, hit any key to continue..."; read empty
 
 ## SET UP LOCALE
 clear
@@ -116,7 +116,7 @@ arch-chroot /mnt locale-gen
 echo "LANG=$LOCALE" > /mnt/etc/locale.conf
 export LANG="$LOCALE"
 cat /mnt/etc/locale.conf
-echo && echo "Here's your /mnt/etc/locale.conf. Type any key to continue."; read loc_yn
+echo && echo "Here's your /mnt/etc/locale.conf. Type any key to continue."; read empty
 
 ## HOSTNAME
 clear

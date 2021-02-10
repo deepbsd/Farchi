@@ -88,6 +88,9 @@ mkdir /mnt/boot && mount "$BOOT_DEVICE" /mnt/boot
 swapon "$SWAP_DEVICE"
 mkdir /mnt/home && mount "$HOME_DEVICE" /mnt/home
 
+lsblk && echo "Here're your new block devices. (Type any key to continue...)" ; read empty
+
+
 ###  Install base system
 clear
 echo && echo "Press any key to continue to install BASE SYSTEM..."; read empty

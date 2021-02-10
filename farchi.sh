@@ -122,7 +122,7 @@ BASE_SYSTEM=( base base-devel linux linux-headers linux-firmware dkms vim iwd )
 BASIC_X=( xorg-server xorg-xinit mesa xorg-twm xterm gnome-terminal xfce4-terminal xorg-xclock "${DESKTOP[@]}" ${DISPLAY_MGR[dm]} firefox )
 
 ## These are your specific choices for fonts and wallpapers and X-related goodies
-EXTRA_X=( numix-icon-theme numix-circle-icon-theme adobe-source-code-pro-fonts cantarell-fonts gnu-free-fonts noto-fonts breeze-gtk breeze-icons oxygen-gtk2 gtk-engine-murrine oxygen-icons xcursor-themes adapta-gtk-theme arc-gtk-theme elementary-icon-theme faenza-icon-theme gnome-icon-theme-extras arc-icon-theme lightdm-gtk-greeter-settings lightdm-webkit-theme-litarvan mate-icon-theme materia-gtk-theme papirus-icon-theme xcursor-bluecurve xcursor-premium archlinux-wallpaper deepin-community-wallpapers deepin-wallpapers elementary-wallpapers )
+EXTRA_X=( numix-icon-theme numix-circle-icon-theme adobe-source-code-pro-fonts cantarell-fonts gnu-free-fonts noto-fonts breeze-gtk breeze-icons gtk-engine-murrine oxygen-icons xcursor-themes adapta-gtk-theme arc-gtk-theme elementary-icon-theme faenza-icon-theme gnome-icon-theme-extras arc-icon-theme lightdm-gtk-greeter-settings lightdm-webkit-theme-litarvan mate-icon-theme materia-gtk-theme papirus-icon-theme xcursor-bluecurve xcursor-premium archlinux-wallpaper deepin-community-wallpapers deepin-wallpapers elementary-wallpapers )
 
 EXTRA_DESKTOPS=( mate mate-extra xfce4 xfce4-goodies i3-gaps i3status i3blocks nitrogen feh rofi dmenu terminator ttf-font-awesome ttf-ionicons )
 

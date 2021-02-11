@@ -101,7 +101,7 @@ echo && echo "Base system installed.  Press any key to continue..."; read empty
 echo "Generating fstab..."
 genfstab -U /mnt >> /mnt/etc/fstab
 cat /mnt/etc/fstab
-echo && echo "Here's your fstab ..."; read empty
+echo && echo "Here's your fstab. Type any key to continue..."; read empty
 
 ## SET UP TIMEZONE AND LOCALE
 clear

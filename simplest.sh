@@ -183,5 +183,9 @@ echo "mbr bootloader installed..."
 echo "configuring /boot/grub/grub.cfg..."
 arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 
+##  Have to start doing this now...
+pacman -S pambase systemd-homed
+systemctl enable systemd-homed
+
 echo "Your system is installed.  Type shutdown -h now to shutdown system and remove bootable media, then restart"
 read empty

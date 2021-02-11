@@ -71,6 +71,10 @@ if $(install_x); then
 
     echo "Enabling display manager service..."
     systemctl enable ${DISPLAY_MGR[service]}
+    pacman -S pambase
+    pacman -S systemd-homed 
+    systemctl enable systemd-homed
+    systemctl start systemd-homed
     echo && echo "Your desktop and display manager should now be installed..."
     sleep 5
 fi

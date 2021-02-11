@@ -510,6 +510,9 @@ fi
 echo "configuring /boot/grub/grub.cfg..."
 arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
     
+arch-chroot /mnt pacman -S pambase systemd-homed
+arch-chroot /mnt systemctl enable systemd-homed
+
 echo "System should now be installed and ready to boot!!!"
 echo && echo "Type shutdown -h now and remove Installation Media and then reboot"
 echo && echo

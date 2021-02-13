@@ -95,6 +95,28 @@ and then you can customize _farchi\_target.sh_ just for your specific installati
 _arch\_linux\_install.txt_ is a basic summary of the tasks needed to install an Arch
 system.
 
+## SUDO Problems
+
+I noticed on a recent install that I was getting a lot of strange errors with `sudo`.
+I would type the sudo password and would be told that my password was wrong.  It wasn't
+wrong.  But for some reason it wasn't being accepted.  I was certain that my username
+was added to `/etc/sudoers` and that I was typing my password correctly, without a capslock
+problem or any such keyboard-related mishap.  My password was not getting recognized with
+my account, apparently.  I started googling, and I found out that there were two problem
+that could cause this.  I wasn't sure which to try first, so I did them both, and the 
+problem went away instantly.  I installed `pambase` and I enabled `systemd-homed`.  As a
+consequence, I added these lines to the end of the farchi scripts and the `simplest.sh` script.
+I even started checking for the service in `post_install.sh`.  The lines are
+```
+pacman -S pambase systemd-homed
+systemctl enable sysstemd-homed
+```
+Obviously, you want to start that service as well, but at least the service should be
+started when the machine starts up.  
+
+I'm not sure what change made this addition necessary.  It used to be that I never had to 
+think about any of this.  Perhaps pambase was already installed?  Perhaps `homed` was
+already started somewhere?  I don't know.  But adding these lines fixed my problem.
 
 ## On LUKS
 

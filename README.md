@@ -77,6 +77,15 @@ func_name(){
 And about a million other little tiny rules that still bite me in the butt every day.
 Hope you have fun!
 
+## simplest.sh
+
+This is a starter script for your own script.  It has the bare essentials for installing your own MBR-based
+installation.  The same "you'll need to change" fules apply.  But this is a simpler script to start
+with.  The purpose here is to build out your own script as your knowledge grows.  Figure out how to do a 
+GPT disktable, then try LVM with each of those.  Then RAID or LUKS if you like.  Or maybe you want to
+try out some other customizations for your own needs.  Hopefully `simplest.sh` can help with your early 
+steps!
+
 ## More Notes
 
 If you decide to NOT install X11, there is an additional _install\_x.sh_ script.  The
@@ -142,9 +151,8 @@ separate keys for separate physical volumes if you use LUKS on LVM, adding more
 complexity and less security to the mix.  I'm frankly not sure which method I want to use
 at this point...
 
-## simplest.sh
+## More on LUKS
 
-This is a starter script for your own script.  It has the bare essentials for installing your own MBR-based
-installation.  The same "you'll need to change" fules apply.  But this is a simpler script to start
-with.  
+I sort of stalled out on learning LUKS.  I keep running out of interest in this department.
+I'll have to try to recommit myself!
 

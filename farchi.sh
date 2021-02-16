@@ -6,8 +6,7 @@
 ######     GLOBAL PREFERENCES   ##########
 ##########################################
 
-## Actual script begins around line 135, so double check 
-## that all your preferences are correct up until then
+## Preferences can be set up to about line 150
 
 # VERIFY BOOT MODE
 efi_boot_mode(){

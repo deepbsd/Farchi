@@ -6,7 +6,7 @@
 ######     GLOBAL PREFERENCES   ##########
 ##########################################
 
-## Actual script begins around line 220 or so
+## Preferences can be set up to about line 150
 
 # VERIFY BOOT MODE
 efi_boot_mode(){
@@ -27,12 +27,15 @@ $(use_nonus_keymap()) && loadkeys "${default_keymap}"
 # Change according to your taste!
 HOSTNAME="archie1"
 
+# Change if not installing to a VM
 VIDEO_DRIVER="xf86-video-nouveau"
 
 #############################################################
 ##############    DISK DEVICES and SLICES   #################
 #############################################################
+
 IN_DEVICE=/dev/sda
+#IN_DEVICE=/dev/nvme0n0
 
 if $(efi_boot_mode) ; then
     DISKLABEL='GPT'

@@ -91,12 +91,11 @@ SWAP_SIZE=32G
 ROOT_SIZE=100G
 HOME_SIZE=    # Take whatever is left over after other partitions
 
-#( $(efi_boot_mode) && EFI_MTPT=/mnt/boot/efi ) || unset EFI_MTPT
-
 ##########################################################
 ######     TIMEZONE, LOCALE, KEYBOARD (assumes US),   ####
 ######     DESKTOP, WIFI DRIVER                       ####
 ##########################################################
+
 TIME_ZONE="America/New_York"
 LOCALE="en_US.UTF-8"
 FILESYSTEM=ext4

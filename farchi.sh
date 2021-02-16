@@ -83,7 +83,7 @@ if $(efi_boot_mode) ; then
     unset BOOT_SIZE
 else
     unset EFI_SIZE; unset EFI_MTPT
-    #BOOT_SIZE=512M
+    BOOT_SIZE=512M
 fi
 
 ## Change these for YOUR installation.  I'm using a 30G VM
@@ -101,7 +101,6 @@ LOCALE="en_US.UTF-8"
 FILESYSTEM=ext4
 DESKTOP=('cinnamon' 'nemo-fileroller' 'lightdm-gtk-greeter')
 declare -A DISPLAY_MGR=( [dm]='lightdm' [service]='lightdm.service' )
-
 
 if $(use_bcm4360) ; then
     WIRELESSDRIVERS="broadcom-wl-dkms"
@@ -509,8 +508,7 @@ fi
 echo "configuring /boot/grub/grub.cfg..."
 arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
     
-arch-chroot /mnt pacman -S pambase systemd-homed
-arch-chroot /mnt systemctl enable systemd-homed
+arch-chroot /mnt pacman -S pambase 
 
 echo "System should now be installed and ready to boot!!!"
 echo && echo "Type shutdown -h now and remove Installation Media and then reboot"

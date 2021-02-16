@@ -381,7 +381,6 @@ fi
 ## INSTALL BASE SYSTEM
 clear
 echo && echo "Press any key to continue to install BASE SYSTEM..."; read empty
-echo && echo "${BASE_SYSTEM[@]}"
 pacstrap /mnt "${BASE_SYSTEM[@]}"
 echo && echo "Base system installed.  Press any key to continue..."; read empty
 
@@ -416,7 +415,7 @@ arch-chroot /mnt locale-gen
 echo "LANG=$LOCALE" > /mnt/etc/locale.conf
 export LANG="$LOCALE"
 cat /mnt/etc/locale.conf
-echo && echo "Here's your /mnt/etc/locale.conf. Type any key to continue."; read loc_yn
+echo && echo "Here's your /mnt/etc/locale.conf. Type any key to continue."; read empty
 
 
 ## HOSTNAME
@@ -431,9 +430,11 @@ cat > /mnt/etc/hosts <<HOSTS
 HOSTS
 
 echo && echo "/etc/hostname and /etc/hosts files configured..."
+echo "/etc/hostname . . . "
 cat /mnt/etc/hostname 
+echo "/etc/hosts . . ."
 cat /mnt/etc/hosts
-echo && echo "Here are /etc/hostname and /etc/hosts. Type any key to continue "; read etchosts_yn
+echo && echo "Here are /etc/hostname and /etc/hosts. Type any key to continue "; read empty
 
 ## SET PASSWD
 clear

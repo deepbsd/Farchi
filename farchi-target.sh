@@ -177,7 +177,6 @@ show_prefs(){
         echo "We ARE NOT installing X "
     fi
 
-
     echo "Type any key to continue or CTRL-C to exit..."
     read empty
 }
@@ -190,7 +189,7 @@ find_card(){
 
 format_it(){
     device=$1; fstype=$2
-    mkfs."$fstype" "$device" || error "can't format $device with $fstype"
+    mkfs."$fstype" "$device" || error "format_it(): can't format $device with $fstype"
 }
 
 mount_it(){
@@ -508,8 +507,7 @@ fi
 echo "configuring /boot/grub/grub.cfg..."
 arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
     
-arch-chroot /mnt pacman -S pambase systemd-homed
-arch-chroot /mnt systemctl enable systemd-homed
+arch-chroot /mnt pacman -S pambase 
 
 echo "System should now be installed and ready to boot!!!"
 echo && echo "Type shutdown -h now and remove Installation Media and then reboot"

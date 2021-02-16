@@ -120,6 +120,11 @@ I even started checking for the service in `post_install.sh`.  The lines are
 pacman -S pambase systemd-homed
 systemctl enable sysstemd-homed
 ```
+
+Wait!  I just took out the `systemd-homed` service!  For some reason, a pacman search
+no longer returns it as a package.  Not sure what's going on there!  Probably they
+deleted the package!
+
 Obviously, you want to start that service as well, but at least the service should be
 started when the machine starts up.  
 

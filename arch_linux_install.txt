@@ -1,26 +1,25 @@
-# Tasks in order
-1. set keyboard
-2. verify boot mode
+#############   TASKS IN ORDER
+1. set keyboard (if non-us)
+2. verify boot mode (EFI or not)
 3. update mirrors
-4. check connection
-#5. set locale, timezone and ntp/clock
-5. prepare drives: partition, make fs, swap, format, mount 
-6. install options
-7. select the mirrors
+4. check network connection
+5. set locale, timezone and ntp/clock for installer
+6. prepare drives: partition, make fs, swap, format, mount 
+7. #  reflector does this already:  select the mirrors
 8. install essential packages
 9. fstab
-10. chroot
+10. arch-chroot /mnt
 11. time zone
 12. set locale
 13. set network and hostname configs
 14. initramfs
 15. root password
 16. boot loader
-17. add sudo, add sudo user, git, gnupg, ssh, yay, pamac,
-pamac-tray, etc
+17. add sudo, add sudo user, git, gnupg, ssh, yay, pamac, pamac-tray, paru etc
 18. install xorg and desktops and basic software
 19. install desktop added software
-20. reboot system
+20. install grub
+21. reboot system
 
 ########  AFTER INSTALL ###########
 1. copy dotfiles and vim subdirs

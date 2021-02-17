@@ -132,6 +132,11 @@ I'm not sure what change made this addition necessary.  It used to be that I nev
 think about any of this.  Perhaps pambase was already installed?  Perhaps `homed` was
 already started somewhere?  I don't know.  But adding these lines fixed my problem.
 
+Latest note!  I just took out the pambase and systemd-homed lines (except for checking 
+for whether the service is running).  This could all be some kind of mistake.  I don't 
+know what's going on with pambase and systemd-homed.  Not even sure if I need to change anything
+at all.
+
 ## On LUKS
 
 I'm beginning to look into encryption with Arch.  I'm just beginning to read up on it.

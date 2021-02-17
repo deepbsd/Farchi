@@ -34,7 +34,7 @@ mate_desktop=( mate mate-extra )
 i3gaps_desktop=( i3-gaps dmenu feh rofi i3status i3blocks nitrogen i3status ttf-font-awesome ttf-ionicons )
 
 ## Python3 should be installed by default
-devel_stuff=( git nodejs npm npm-check-updates ruby )
+#devel_stuff=( git nodejs npm npm-check-updates ruby )
 
 printing_stuff=( system-config-printer foomatic-db foomatic-db-engine gutenprint cups cups-pdf cups-filters cups-pk-helper ghostscript gsfonts )
 
@@ -71,10 +71,6 @@ if $(install_x); then
 
     echo "Enabling display manager service..."
     systemctl enable ${DISPLAY_MGR[service]}
-    pacman -S pambase
-    pacman -S systemd-homed 
-    systemctl enable systemd-homed
-    systemctl start systemd-homed
     echo && echo "Your desktop and display manager should now be installed..."
     sleep 5
 fi

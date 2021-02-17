@@ -122,7 +122,7 @@ EXTRA_X=( numix-icon-theme numix-circle-icon-theme adobe-source-code-pro-fonts c
 
 EXTRA_DESKTOPS=( mate mate-extra xfce4 xfce4-goodies i3-gaps i3status i3blocks nitrogen feh rofi dmenu terminator ttf-font-awesome ttf-ionicons )
 
-GOODIES=( htop neofetch screenfetch powerline powerline-fonts powerline-vim )
+GOODIES=( pamac pamac-tray htop neofetch screenfetch powerline powerline-fonts powerline-vim )
 
 ## -----------  Some of these are included, but it's all up to you...
 xfce_desktop=( xfce4 xfce4-goodies )
@@ -508,7 +508,6 @@ fi
 echo "configuring /boot/grub/grub.cfg..."
 arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
     
-arch-chroot /mnt pacman -S pambase 
 
 echo "System should now be installed and ready to boot!!!"
 echo && echo "Type shutdown -h now and remove Installation Media and then reboot"

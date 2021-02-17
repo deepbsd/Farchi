@@ -5,16 +5,16 @@
 # Make sure systemd-homed is working, or else sudo will not work
 
 systemctl status systemd-homed
-
-[[ "$?" -eq 0 ]] && echo "Be sure to start and enable systemd-homed (as root) or else sudo will not work properly"
-
+echo "Be sure to start and enable systemd-homed (as root) or else sudo may not work properly"
 echo "Also, reinstall pambase if necessary `pacman -S pambase`"
+echo "Type any to continue..." ; read empty
 
 ## PERSONAL DIRECTORIES AND RESOURCES
 echo "Making personal subdirectories..."
 mkdir tmp repos build 
 echo "Download home directory files from what host on network?"; read whathost
-scp -o StrictHostKeyChecking=no -r dsj@"$whathost".lan:{adm,dotfiles,.vim,public_html,sounds,.gkrellm2,wallpaper,wallpaper1,bin,.ssh,.gnupg,Music} .
+#scp -o StrictHostKeyChecking=no -r dsj@"$whathost".lan:{adm,dotfiles,.vim,public_html,sounds,.gkrellm2,wallpaper,wallpaper1,bin,.ssh,.gnupg,Music} .
+scp -Br dsj@"$whathost".lan:{adm,dotfiles,.vim,public_html,sounds,.gkrellm2,wallpaper,wallpaper1,bin,.ssh,.gnupg,Music} .
 
 ## SYNC PACMAN DBs
 sudo pacman -Syy

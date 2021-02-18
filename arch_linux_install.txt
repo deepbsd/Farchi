@@ -8,12 +8,13 @@
 6. prepare drives: partition, make fs, swap, format, mount 
 7. genfstab and then check /mnt/etc/fstab from step 6
 8. pacstrap essential packages
+9.  nevermind
 10. arch-chroot /mnt timezone
 11. arch-chroot /mnt set locale
 13. arch-chroot /mnt set network and hostname configs
 14. arch-chroot /mnt build initramfs
 15. arch-chroot /mnt root password
-17. arch-chroot /mnt add sudo, add sudo user, git, gnupg, ssh, yay, paru etc
+17. arch-chroot /mnt add sudo, add sudo user, git, gnupg, ssh
 18. arch-chroot /mnt install xorg and desktops and basic software
 19. arch-chroot /mnt install desktop added software
 20. arch-chroot /mnt install grub

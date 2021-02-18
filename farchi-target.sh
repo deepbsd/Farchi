@@ -443,11 +443,12 @@ arch-chroot /mnt passwd
 
 ## INSTALLING MORE ESSENTIALS
 clear
-echo && echo "Enabling dhcpcd, sshd and NetworkManager services..." && echo
-arch-chroot /mnt pacman -S git openssh networkmanager dhcpcd man-db man-pages
+echo && echo "Enabling dhcpcd, pambase, sshd and NetworkManager services..." && echo
+arch-chroot /mnt pacman -S git openssh networkmanager dhcpcd man-db man-pages pambase
 arch-chroot /mnt systemctl enable dhcpcd.service
 arch-chroot /mnt systemctl enable sshd.service
 arch-chroot /mnt systemctl enable NetworkManager.service
+arch-chroot /mnt systemctl enable systemd-homed
 
 echo && echo "Press any key to continue..."; read empty
 

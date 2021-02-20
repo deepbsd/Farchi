@@ -12,6 +12,12 @@ echo "Type any to continue..." ; read empty
 ## PERSONAL DIRECTORIES AND RESOURCES
 echo "Making personal subdirectories..."
 mkdir tmp repos build 
+
+echo "Start the ssh-agent service..."
+eval $(ssh-agent)
+ls ~/.ssh/* ; echo "Add which key? "; read key_name
+ssh-add ~/.ssh/"$key_name"
+
 echo "Download home directory files from what host on network?"; read whathost
 #scp -o StrictHostKeyChecking=no -r dsj@"$whathost".lan:{adm,dotfiles,.vim,public_html,sounds,.gkrellm2,wallpaper,wallpaper1,bin,.ssh,.gnupg,Music} .
 scp -Br dsj@"$whathost".lan:{adm,dotfiles,.vim,public_html,sounds,.gkrellm2,wallpaper,wallpaper1,bin,.ssh,.gnupg,Music} .

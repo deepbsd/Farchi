@@ -66,7 +66,7 @@ echo && echo "Date/Time service Status is . . . "
 timedatectl status
 sleep 4
 
-$(efi_boot_mode) && error "You have an EFI Bios; you must use the Farchi or Darchi script for installation"
+$(efi_boot_mode) && error "You have an UEFI Bios; Please use the Farchi or Darchi script for installation"
 
 ####  Could just use cfdisk to partition drive
 #cfdisk "$IN_DEVICE"    # for non-EFI VM: /boot 512M; / 13G; Swap 2G; Home Remainder

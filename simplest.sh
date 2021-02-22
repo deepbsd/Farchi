@@ -32,6 +32,15 @@ devel_stuff=( git nodejs npm npm-check-updates ruby )
 printing_stuff=( system-config-printer foomatic-db foomatic-db-engine gutenprint cups cups-pdf cups-filters cups-pk-helper ghostscript gsfonts )
 multimedia_stuff=( brasero sox cheese eog shotwell imagemagick sox cmus mpg123 alsa-utils cheese )
 
+# VERIFY BOOT MODE
+efi_boot_mode(){
+    [[ -d /sys/firmware/efi/efivars ]] && return 0
+    return 1
+}
+
+# All purpose error
+error(){ echo "Error: $1" && exit 1; }
+
 ###############################
 ###  START SCRIPT HERE
 ###############################
@@ -57,6 +66,8 @@ echo && echo "Date/Time service Status is . . . "
 timedatectl status
 sleep 4
 
+$(efi_boot_mode) && error "You have an EFI Bios; you must use the Farchi or Darchi script for installation"
+
 ####  Could just use cfdisk to partition drive
 #cfdisk "$IN_DEVICE"    # for non-EFI VM: /boot 512M; / 13G; Swap 2G; Home Remainder
 
@@ -65,6 +76,8 @@ sleep 4
 ###        exist here.  An MBR disklabel is very old, limited, and may well inspire
 ###        you to investigate other options, which is a good exercise.  But, MBR is pretty
 ###        simple and reliable, within its constraints.  Bon voyage!
+
+
 
 # Using sfdisk because we're talking MBR disktable now...
 cat > /tmp/sfdisk.cmd << EOF

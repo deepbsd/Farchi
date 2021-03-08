@@ -27,6 +27,7 @@ sudo pacman -Syy
 
 ## INSTALL DVD SUPPORT, GKRELLM, MLOCATE
 sudo pacman -S libdvdread libdvdcss libdvdnav gkrellm mlocate fzf
+echo "updating locate database..."
 sudo updatedb
 
 ## INSTALL POWERLINE

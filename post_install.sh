@@ -27,6 +27,10 @@ sudo pacman -Syy
 
 ## INSTALL DVD SUPPORT, GKRELLM, MLOCATE
 sudo pacman -S libdvdread libdvdcss libdvdnav gkrellm mlocate fzf
+sudo updatedb
+
+## INSTALL POWERLINE
+$(which powerline >/dev/null) || sudo pacman -S powerline powerline-fonts
 
 ## CHECK FOR OLD FAITHFULS
 $(which gkrellm) || sudo pacman -S gkrellm

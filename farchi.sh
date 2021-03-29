@@ -155,21 +155,35 @@ show_prefs(){
     echo "TIMEZONE: ${TIME_ZONE}   LOCALE:  ${LOCALE}"
 
     if $(efi_boot_mode); then
-        echo "ROOT_SIZE: ${ROOT_SIZE} on ${ROOT_DEVICE}"
-        echo "EFI_SIZE: ${EFI_SIZE} on ${EFI_DEVICE}"
-        echo "SWAP_SIZE: ${SWAP_SIZE} on ${SWAP_DEVICE}"
-        echo "HOME_SIZE: Occupying rest of ${HOME_DEVICE}"
+        if $(use_lvm); then
+            echo "We ARE using LVM"
+            echo "PV is ${PV_DEVICE} with LVGRP ${VOL_GROUP}"
+            echo "ROOT_SIZE: ${ROOT_SIZE} on ${LV_ROOT}"
+            echo "EFI_SIZE: ${EFI_SIZE} on ${EFI_DEVICE}"
+            echo "SWAP_SIZE: ${SWAP_SIZE} on ${LV_SWAP}"
+            echo "HOME_SIZE: Occupying rest of ${LV_HOME}"
+        else
+            echo "We ARE NOT using LVM"
+            echo "ROOT_SIZE: ${ROOT_SIZE} on ${ROOT_DEVICE}"
+            echo "EFI_SIZE: ${EFI_SIZE} on ${EFI_DEVICE}"
+            echo "SWAP_SIZE: ${SWAP_SIZE} on ${SWAP_DEVICE}"
+            echo "HOME_SIZE: Occupying rest of ${HOME_DEVICE}"
+        fi
     else
-        echo "ROOT_SIZE: ${ROOT_SIZE} on ${ROOT_DEVICE}"
-        echo "BOOT_SIZE: ${BOOT_SIZE} on ${BOOT_DEVICE}"
-        echo "SWAP_SIZE: ${SWAP_SIZE} on ${SWAP_DEVICE}"
-        echo "HOME_SIZE: Occupying rest of ${HOME_DEVICE}"
-    fi
-
-    if $(use_lvm); then
-        echo "We ARE using LVM"
-    else
-        echo "We ARE NOT using LVM"
+        if $(use_lvm); then
+            echo "We ARE using LVM"
+            echo "PV is ${PV_DEVICE} with LVGRP ${VOL_GROUP}"
+            echo "ROOT_SIZE: ${ROOT_SIZE} on ${LV_ROOT}"
+            echo "EFI_SIZE: ${EFI_SIZE} on ${EFI_DEVICE}"
+            echo "SWAP_SIZE: ${SWAP_SIZE} on ${LV_SWAP}"
+            echo "HOME_SIZE: Occupying rest of ${LV_HOME}"
+        else
+            echo "We ARE NOT using LVM"
+            echo "ROOT_SIZE: ${ROOT_SIZE} on ${ROOT_DEVICE}"
+            echo "BOOT_SIZE: ${BOOT_SIZE} on ${BOOT_DEVICE}"
+            echo "SWAP_SIZE: ${SWAP_SIZE} on ${SWAP_DEVICE}"
+            echo "HOME_SIZE: Occupying rest of ${HOME_DEVICE}"
+        fi
     fi
 
     if $(install_x); then 

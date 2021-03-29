@@ -158,10 +158,10 @@ show_prefs(){
         if $(use_lvm); then
             echo "We ARE using LVM"
             echo "PV is ${PV_DEVICE} with LVGRP ${VOL_GROUP}"
-            echo "ROOT_SIZE: ${ROOT_SIZE} on ${LV_ROOT}"
+            echo "ROOT_SIZE: ${ROOT_SIZE} on ${VOL_GROUP}-${LV_ROOT}"
             echo "EFI_SIZE: ${EFI_SIZE} on ${EFI_DEVICE}"
-            echo "SWAP_SIZE: ${SWAP_SIZE} on ${LV_SWAP}"
-            echo "HOME_SIZE: Occupying rest of ${LV_HOME}"
+            echo "SWAP_SIZE: ${SWAP_SIZE} on ${VOL_GROUP}-${LV_SWAP}"
+            echo "HOME_SIZE: Occupying rest of ${VOL_GROUP}-${LV_HOME}"
         else
             echo "We ARE NOT using LVM"
             echo "ROOT_SIZE: ${ROOT_SIZE} on ${ROOT_DEVICE}"

@@ -163,7 +163,7 @@ show_prefs(){
     if $(efi_boot_mode); then
         if $(use_lvm); then
             echo "We ARE using LVM"
-            echo "PV is ${PV_DEVICE} with LVGRP ${VOL_GROUP}"
+            echo "PHYS_VOL is ${PV_DEVICE} with LVGRP ${VOL_GROUP}"
             echo "ROOT_SIZE: ${ROOT_SIZE} on ${VOL_GROUP}-${LV_ROOT}"
             echo "EFI_SIZE: ${EFI_SIZE} on ${EFI_DEVICE}"
             echo "SWAP_SIZE: ${SWAP_SIZE} on ${VOL_GROUP}-${LV_SWAP}"

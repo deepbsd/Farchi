@@ -155,6 +155,10 @@ show_prefs(){
     echo "Here are your preferences that will be installed: "
     echo "HOSTNAME: ${HOSTNAME}  INSTALLATION DRIVE: ${IN_DEVICE}  DISKLABEL: ${DISKLABEL}"
     echo "TIMEZONE: ${TIME_ZONE}   LOCALE:  ${LOCALE}"
+    echo "KEYBOARD: ${default_keymap}"
+    if $(use_crypt); then echo "We ARE using CRYPTSETUP." 
+    else echo "We ARE NOT using CRYPTSETUP."
+    fi
 
     if $(efi_boot_mode); then
         if $(use_lvm); then

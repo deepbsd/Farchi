@@ -15,7 +15,7 @@ efi_boot_mode(){
 }
 
 ### CHANGE ACCORDING TO PREFERENCE
-install_x(){ return 0; }     # return 0 if you want to install X
+install_x(){ return 1; }     # return 0 if you want to install X
 use_lvm(){ return 0; }       # return 0 if you want lvm
 use_crypt(){ return 1; }     # return 0 if you want crypt (NOT IMPLEMENTED YET)
 use_bcm4360() { return 1; }  # return 0 if you want bcm4360
@@ -221,6 +221,29 @@ validate_pkgs(){
         done
     done
     echo -e "\n" && read -p "Press any key to continue." empty
+}
+
+# ENCRYPT DISK WHEN POWER IS OFF
+crypt_setup(){
+    # Takes a disk partition as an argument
+    # Give msg to user about purpose of encrypted physical volume
+    cat <<END_OF_MSG
+
+"You are about to encrypt a physical volume.  Your data will be stored in an encrypted
+state when powered off.  Your files will only be protected while the system is powered off.
+This could be very useful if your laptop gets stolen, for example."
+
+END_OF_MSG
+    read -p "Encrypting a disk partition. Please enter a memorable passphrase: " -s passphrase
+    #echo -n "$passphrase" | cryptsetup -q luksFormat $1 -
+    echo "$passphrase" | cryptsetup -q luksFormat --hash=sha512 --key-size=512 --cipher=aes-xts-plain64 --verify-passphrase $1
+
+    cryptsetup luksOpen  $1 sda_crypt
+    echo "Wiping every byte of device with zeros, could take a while..."
+    dd if=/dev/zero of=/dev/mapper/sda_crypt bs=1M
+    cryptsetup luksClose sda_crypt
+    echo "Filling header of device with random data..."
+    dd if=/dev/urandom of="$1" bs=512 count=20480
 }
 
 format_it(){

@@ -126,7 +126,7 @@ EXTRA_X3=( mate-icon-theme materia-gtk-theme papirus-icon-theme xcursor-bluecurv
 
 EXTRA_DESKTOPS=( mate mate-extra xfce4 xfce4-goodies i3-gaps i3status i3blocks nitrogen feh rofi dmenu terminator ttf-font-awesome ttf-ionicons )
 
-GOODIES=( pamac pamac-tray htop neofetch screenfetch powerline powerline-fonts powerline-vim )
+GOODIES=( htop neofetch screenfetch powerline powerline-fonts powerline-vim )
 
 ## -----------  Some of these are included, but it's all up to you...
 xfce_desktop=( xfce4 xfce4-goodies )
@@ -213,8 +213,9 @@ find_card(){
 
 # VALIDATE PKG NAMES IN SCRIPT
 validate_pkgs(){
-    echo && echo -n "    validating pkg names..."
+    echo "updating pacman pkg database."
     pacman -Sy     # need to initialize pacman db
+    echo && echo -n "    validating pkg names..."
     for pkg_arr in "${all_pkgs[@]}"; do
         declare -n arr_name=$pkg_arr
         for pkg_name in "${arr_name[@]}"; do

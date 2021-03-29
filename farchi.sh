@@ -214,6 +214,7 @@ find_card(){
 # VALIDATE PKG NAMES IN SCRIPT
 validate_pkgs(){
     echo && echo -n "    validating pkg names..."
+    pacman -Sy     # need to initialize pacman db
     for pkg_arr in "${all_pkgs[@]}"; do
         declare -n arr_name=$pkg_arr
         for pkg_name in "${arr_name[@]}"; do

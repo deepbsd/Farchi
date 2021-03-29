@@ -142,6 +142,8 @@ printing_stuff=( system-config-printer foomatic-db foomatic-db-engine gutenprint
 
 multimedia_stuff=( brasero sox eog shotwell imagemagick sox cmus mpg123 alsa-utils cheese )
 
+all_pkgs=( BASE_SYSTEM BASIC_X EXTRA_X1 EXTRA_X2 EXTRA_X3 EXTRA_DESKTOPS GOODIES xfce_desktop mate_desktop i3gaps_desktop devel_stuff printing_stuff multimedia_stuff )
+
 ##########################################
 ######       FUNCTIONS       #############
 ##########################################
@@ -203,6 +205,22 @@ show_prefs(){
 find_card(){
     card=$(lspci | grep VGA | sed 's/^.*: //g')
     echo "You're using a $card" && echo
+}
+
+# VALIDATE PKG NAMES IN SCRIPT
+validate_pkgs(){
+    echo && echo -n "    validating pkg names..."
+    for pkg_arr in "${all_pkgs[@]}"; do
+        declare -n arr_name=$pkg_arr
+        for pkg_name in "${arr_name[@]}"; do
+            if $( pacman -Sp $pkg_name &>/dev/null ); then
+                echo -n .
+            else 
+                echo -n "$pkg_name from $pkg_arr not in repos."
+            fi
+        done
+    done
+    echo -e "\n" && read -p "Press any key to continue." empty
 }
 
 format_it(){
@@ -379,6 +397,8 @@ echo "Good!  We're connected!!!" && sleep 3
 ## SHOW THE PREFERENCES BEFORE STARTING INSTALLATION
 ## Last chance for user to doublecheck his preferences
 show_prefs
+
+validate_pkgs
 
 ## CHECK TIME AND DATE BEFORE INSTALLATION
 timedatectl set-ntp true

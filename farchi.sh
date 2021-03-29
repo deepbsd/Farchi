@@ -25,7 +25,7 @@ default_keymap='us'             # set to your keymap name
 $(use_nonus_keymap()) && loadkeys "${default_keymap}"
 
 # Change according to your taste!
-HOSTNAME="marbie1"
+HOSTNAME="effie1"
 
 # Change if not installing to a VM
 VIDEO_DRIVER="xf86-video-vmware"
@@ -87,7 +87,7 @@ else
 fi
 
 ## Change these for YOUR installation.  I'm using a 30G VM
-SWAP_SIZE=2G
+SWAP_SIZE=4G
 ROOT_SIZE=13G
 HOME_SIZE=    # Take whatever is left over after other partitions
 
@@ -173,10 +173,10 @@ show_prefs(){
         if $(use_lvm); then
             echo "We ARE using LVM"
             echo "PV is ${PV_DEVICE} with LVGRP ${VOL_GROUP}"
-            echo "ROOT_SIZE: ${ROOT_SIZE} on ${LV_ROOT}"
+            echo "ROOT_SIZE: ${ROOT_SIZE} on ${VOL_GROUP}-${LV_ROOT}"
             echo "EFI_SIZE: ${EFI_SIZE} on ${EFI_DEVICE}"
-            echo "SWAP_SIZE: ${SWAP_SIZE} on ${LV_SWAP}"
-            echo "HOME_SIZE: Occupying rest of ${LV_HOME}"
+            echo "SWAP_SIZE: ${SWAP_SIZE} on ${VOL_GROUP}-${LV_SWAP}"
+            echo "HOME_SIZE: Occupying rest of ${VOL_GROUP}-${LV_HOME}"
         else
             echo "We ARE NOT using LVM"
             echo "ROOT_SIZE: ${ROOT_SIZE} on ${ROOT_DEVICE}"

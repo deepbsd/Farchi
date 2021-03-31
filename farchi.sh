@@ -343,7 +343,7 @@ EOF
 
 
     # run cryptsetup on root device
-    [[ "$use_crypt" == 'TRUE' ]] && crypt_setup "$ROOT_DEVICE"
+    $(use_crypt) && crypt_setup "$ROOT_DEVICE"
     
     # create the physical volumes
     pvcreate "$PV_DEVICE"

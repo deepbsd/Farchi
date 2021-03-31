@@ -340,6 +340,10 @@ EOF
         # Using sfdisk because we're talking MBR disktable now...
         sfdisk "$IN_DEVICE" < /tmp/sfdisk.cmd 
     fi
+
+
+    # run cryptsetup on root device
+    [[ "$use_crypt" == 'TRUE' ]] && crypt_setup "$ROOT_DEVICE"
     
     # create the physical volumes
     pvcreate "$PV_DEVICE"

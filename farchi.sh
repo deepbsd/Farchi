@@ -242,7 +242,7 @@ This could be very useful if your laptop gets stolen, for example."
 END_OF_MSG
     read -p "Encrypting a disk partition. Please enter a memorable passphrase: " -s passphrase
     #echo -n "$passphrase" | cryptsetup -q luksFormat $1 -
-    echo "$passphrase" | cryptsetup -q luksFormat --hash=sha512 --key-size=512 --cipher=aes-xts-plain64 --verify-passphrase $1
+    echo -n "$passphrase" | cryptsetup -q luksFormat --hash=sha512 --key-size=512 --cipher=aes-xts-plain64 --verify-passphrase $1 -
 
     cryptsetup luksOpen  $1 sda_crypt
     echo "Wiping every byte of device with zeros, could take a while..."
@@ -314,7 +314,7 @@ EOF
 # PART OF LVM INSTALLATION
 lvm_hooks(){
     clear
-    echo "add lvm2 to mkinitcpio hooks HOOKS=( base udev ... block lvm2 filesystems )"
+    echo "adding lvm2 to mkinitcpio hooks HOOKS=( base udev ... block lvm2 filesystems )"
     sleep 4
     sed -i 's/^HOOKS=(base udev autodetect modconf block filesystems keyboard fsck)$/HOOKS=(base udev autodetect modconf block lvm2 filesystems keyboard fsck)/g' /mnt/etc/mkinitcpio.conf
     #vim /mnt/etc/mkinitcpio.conf

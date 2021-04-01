@@ -316,7 +316,7 @@ lvm_hooks(){
     clear
     echo "add lvm2 to mkinitcpio hooks HOOKS=( base udev ... block lvm2 filesystems )"
     sleep 4
-    sed 's/^HOOKS=(base udev autodetect modconf block filesystems keyboard fsck)$/HOOKS=(base udev autodetect modconf block lvm2 filesystems keyboard fsck)/g' /mnt/etc/mkinitcpio.conf
+    sed -i 's/^HOOKS=(base udev autodetect modconf block filesystems keyboard fsck)$/HOOKS=(base udev autodetect modconf block lvm2 filesystems keyboard fsck)/g' /mnt/etc/mkinitcpio.conf
     vim /mnt/etc/mkinitcpio.conf
     arch-chroot /mnt mkinitcpio -P
     echo "Press any key to continue..."; read empty

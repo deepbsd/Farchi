@@ -3,6 +3,8 @@
 This started as just a personal script, very very simple way to install 
 Arch Linux after booting the archiso ISO image.  
 
+## Installation
+
 You can download the script to your booted archiso image like this:
 
 `curl -O https://raw.githubusercontent.com/deepbsd/farchi/master/farchi.sh`
@@ -19,17 +21,17 @@ You'll need to customize settings for your installation.
 
 2. Your installation drive
 
-3. Partitions and sizes.  By default it's EFI/BOOT: 512M, ROOT: 100G, SWAP: 2xRam (I like
-   to be able to suspend and hibernate), HOME: Rest of disk.  I usually install to _at
-   least_ a 500G drive.  For a VM I create a 30G Virtual drive and create 512M for
-   EVI/BOOT, ROOT is 12G, SWAP is 2G, and HOME is the rest of the drive.
+3. Partitions and sizes.  By default it's EFI/BOOT: 512M, ROOT: 12G, SWAP:
+   4G, HOME: Rest of disk.  I usually install to _at least_ a 500G drive.
+   For a VM I create a 30G Virtual drive and create 512M for EVI/BOOT, ROOT
+   is 12G, SWAP is 2G, and HOME is the rest of the drive.
 
-4. Whether you want LVM or not.  I don't install LUKS by default.  I might change this in
-   the future.
+4. Whether you want LVM or not.  I don't install LUKS by default.  
 
-5. Whether you want BCM4360 Wifi Drivers or not (or some other drivers of your choosing)
-   This is a chipset I often use in my PCI wifi devices.  It's a good one.  But you should install
-   the driver for your wifi device.
+5. Whether you want BCM4360 Wifi Drivers or not (or some other drivers of
+   your choosing) This is a chipset I often use in my PCI wifi devices.
+   It's a good one.  But you should install the driver for your wifi
+   device.
 
 6. Your Video chipset driver to run X11.  This will be one of the _xf86-video-*_ drivers
    for different video chipsets, such as Radeon, Nvidia, Intel, and so forth. I install

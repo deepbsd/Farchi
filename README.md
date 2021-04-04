@@ -36,7 +36,7 @@ You'll need to customize settings for your installation.
 5. `use_bcm4360(){ return 0; }`  Return 0 for yes, 1 for no.  Whether you want BCM4360 Wifi Drivers or
    not (or some other drivers of your choosing). This is a chipset I often use in my PCI wifi devices.
    It's a good one.  But you should install the driver for your wifi device.  The `wl` driver is used for
-   this and many recent Broadcom wifi chipsets.
+   this and many other recent Broadcom wifi chipsets.
 
 6. `install_x(){ return 0; }`  Return 0 for yes, 1 for no.  Do you want to install X11 or not (faster if
    you don't, but you'll probably want to install it anyway).  If you're just experimenting in a VM and

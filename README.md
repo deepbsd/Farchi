@@ -46,11 +46,16 @@ You'll need to customize settings for your installation.
    would you care about a accelerated video driver?)  This is your Video chipset driver to run X11.
    This will be one of the _xf86-video-*_ drivers for different video chipsets, such as Radeon, Nvidia,
    Intel, and so forth. I install xf86-video-vmware by default.
+   `declare -A DISPLAY_MGR=( [dm]='lightdm' [service]='lightdm.service' )` This line sets your display
+   manager.  This is an associative array in BASH, because the service name can often be different
+   from the file name in the Arch repo.  So the display manager contained in `${DISPLAY_MGR[dm]}` while
+   the service name is contained in `${DISPLAY_MGR[service]}`
 
 8. `DESKTOP=(cinnamon nemo-fileroller)`  Your choice.  Many options are available.  What desktop
    environment to you want (or what Window Manager)? I chose lightdm for display manager and Cinnamon for
    desktop environment by default.  XFCE and Mate and i3gaps are also some favorites of mine and are
-   ready to be installed also.
+   ready to be installed also.  Feel free to alter your choices in `EXTRA_X` and the other arrays as
+   you see fit.
 
 9. Your `LOCALE` and `TIME\_ZONE`:  `en\_US-UTF-8` and `America/New York` by default.  Keyboard is
    also `us` by default. `FILESYSTEM=ext4` by default.
@@ -81,8 +86,11 @@ func_name(){
     do something
     returns 0 if successful or non-zero if unsuccessful
 }
-
 ```
+
+You'll notice I do loops and if/then branching routinely throughout the script.  Also, I try 
+to follow `DRY` (Don't Repeat Yourself) by having functions do redundant tasks.
+
 And about a million other little tiny rules that still bite me in the butt every day.
 Hope you have fun!
 
@@ -93,13 +101,16 @@ installation.  The same "you'll need to change" fules apply.  But this is a simp
 with.  The purpose here is to build out your own script as your knowledge grows.  Figure out how to do a 
 GPT disktable, then try LVM with each of those.  Then RAID or LUKS if you like.  Or maybe you want to
 try out some other customizations for your own needs.  Hopefully `simplest.sh` can help with your early 
-steps!
+steps!  I never have found RAID very useful for my needs, but many people have.  But you'll have to add
+that feature yourself, since I don't have it by default.
 
-## More Notes
+## install\_x.sh
 
 If you decide to NOT install X11, there is an additional _install\_x.sh_ script.  The
 commands for installing X can be executed after a basic Arch install is running using
 this script.
+
+## post\_install.sh
 
 There is a _post\_install.sh_ script.  On my home network, I always have hosts that
 contain folders I need on my fresh new installation.  The names of the directories I need
@@ -107,11 +118,16 @@ to recursively copy are installed in here.  Also, I install the AUR helper _yay_
 script.  I also install _google-chrome_ and a few other things.  Hopefully this script
 will give you ideas for your installations.
 
-_farchi\_target.sh_ is in case you want to keep _farchi.sh_ pristine as an example only,
+## _farchi\_target.sh_ 
+
+This is in case you want to keep _farchi.sh_ pristine as an example only,
 and then you can customize _farchi\_target.sh_ just for your specific installation.
 
-_arch\_linux\_install.txt_ is a basic summary of the tasks needed to install an Arch
-system.
+## _arch\_linux\_install.txt_ 
+
+This is a basic summary of the tasks needed to install an Arch system.  It's my step by step
+process to do from the Archiso image and a root terminal when you're not running this script.  
+This is what I used to do before I wrote any scripts.
 
 ## SUDO Problems
 
@@ -125,6 +141,7 @@ that could cause this.  I wasn't sure which to try first, so I did them both, an
 problem went away instantly.  I installed `pambase` and I enabled `systemd-homed`.  As a
 consequence, I added these lines to the end of the farchi scripts and the `simplest.sh` script.
 I even started checking for the service in `post_install.sh`.  The lines are
+
 ```
 pacman -S pambase systemd-homed
 systemctl enable sysstemd-homed
@@ -148,30 +165,6 @@ at all.
 
 ## On LUKS
 
-I'm beginning to look into encryption with Arch.  I'm just beginning to read up on it.
-What I've found so far is that it's probably best to first create the encrypted filesystem
-and *then* to create LVM onto it.  That way you don't have to create cryptographic keys for
-each physical volume and deal with the complexity of that arrangement, and the lack of
-protection also.  Your entries in `/dev/mapper` won't be encrypted, etc.  It's better to 
-add LVM *after* you first get the filesystem encrypted.
-
-BTW, the boot loader cannot be encrypted.  The EFI partition must be loaded unencrypted,
-as I understand it.  Also, extra hooks must be added to `mkinitcpio.conf`.  Also, if you're 
-using systemd init, apparently that's different from using GRUB.  Not sure which one is
-best for all this yet.  You have to pass some command line params at boot to the kernel.
-
-No released version of GRUB supports LUKS2.  Have to use LUKS1 on partitions that GRUB needs
-to access.
-
-## LUKS on LVM vs LVM on LUKS
-
-You cannot span multiple disks if you're using LVM on LUKS.  However, you'll have to use
-separate keys for separate physical volumes if you use LUKS on LVM, adding more 
-complexity and less security to the mix.  I'm frankly not sure which method I want to use
-at this point...
-
-## More on LUKS
-
-I sort of stalled out on learning LUKS.  I keep running out of interest in this department.
-I'll have to try to recommit myself!
-
+Just a reminder that this is simply for when you turn off your PC, if someone tries to access
+your files, they will be encrypted.  There is no encryption protecting your files while the
+system is running.  

@@ -30,8 +30,8 @@ You'll need to customize settings for your installation.
    people enjoy smaller 50-75G partitions however.  If you hibernate your system, a good
    rule of thumb is 2xRAM size for SWAP.
 
-4. `use_lvm(){ return 0; }`  Return 0 for yes, 1 for no.  Whether you want LVM or not.  I prefer LVM and
-   LUKS (encrypted filesystem) since I'm just used to it.
+4. `use_lvm(){ return 0; }`  `use_crypt(){ return 0; }`  Return 0 for yes, 1 for no.  Whether you want
+   LVM or not.  I prefer LVM and LUKS (encrypted filesystem) since I'm just used to it.
 
 5. `use_bcm4360(){ return 0; }`  Return 0 for yes, 1 for no.  Whether you want BCM4360 Wifi Drivers or
    not (or some other drivers of your choosing). This is a chipset I often use in my PCI wifi devices.

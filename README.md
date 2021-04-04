@@ -17,36 +17,43 @@ You'll need to customize settings for your installation.
 
 ## Here's What You'll Want to Change
 
-1. Your hostname
+1. `HOSTNAME=effie1`  Your hostname
 
-2. Your installation drive
+2. `IN_DEVICE=/dev/sda`  Your installation drive
 
-3. Partitions and sizes.  By default it's EFI/BOOT: 512M, ROOT: 12G, SWAP:
-   4G, HOME: Rest of disk.  I usually install to _at least_ a 500G drive.
-   For a VM I create a 30G Virtual drive and create 512M for EVI/BOOT, ROOT
-   is 12G, SWAP is 2G, and HOME is the rest of the drive.
+3. Partitions and sizes.  `EFI_SIZE=512M` or `BOOT_SIZE=512M` (depending on whether
+   you have an EFI or Bios system)  `SWAP_SIZE=4G` `ROOT_SIZE=12G` `HOME_SIZE=` 
+   If you're installing to a VM, these sizes should work.  However if you're installing
+   to actual hardware, these sizes may vary dramatically.  Currently, the HOME partition
+   or LV (logical volume) will occupy whatever space is left over after the ROOT and SWAP 
+   and EFI/BOOT partitions are created.  On regular hardware, I like 100G for root.  Many
+   people enjoy smaller 50-75G partitions however.  If you hibernate your system, a good
+   rule of thumb is 2xRAM size for SWAP.
 
-4. Whether you want LVM or not.  I don't install LUKS by default.  
+4. `use_lvm(){ return 0; }`  Return 0 for yes, 1 for no.  Whether you want LVM or not.  I prefer LVM and
+   LUKS (encrypted filesystem) since I'm just used to it.
 
-5. Whether you want BCM4360 Wifi Drivers or not (or some other drivers of
-   your choosing) This is a chipset I often use in my PCI wifi devices.
-   It's a good one.  But you should install the driver for your wifi
-   device.
+5. `use_bcm4360(){ return 0; }`  Return 0 for yes, 1 for no.  Whether you want BCM4360 Wifi Drivers or
+   not (or some other drivers of your choosing). This is a chipset I often use in my PCI wifi devices.
+   It's a good one.  But you should install the driver for your wifi device.  The `wl` driver is used for
+   this and many recent Broadcom wifi chipsets.
 
-6. Your Video chipset driver to run X11.  This will be one of the _xf86-video-*_ drivers
-   for different video chipsets, such as Radeon, Nvidia, Intel, and so forth. I install
-   xf86-video-vmware by default.
+6. `install_x(){ return 0; }`  Return 0 for yes, 1 for no.  Do you want to install X11 or not (faster if
+   you don't, but you'll probably want to install it anyway).  If you're just experimenting in a VM and
+   testing your script, perhaps you just want to install a bare bones installation to test with.
 
-7. Do you want to install X11 or not (faster if you don't, but you'll probably want to
-   install it anyway).  If you're just experimenting in a VM and testing your script,
-   perhaps you just want to install a bare bones installation to test with.
+7. `VIDEO_DRIVER=xf86-video-vmware`  `install_x(){ return 0; }`  You must be installing X (or else why
+   would you care about a accelerated video driver?)  This is your Video chipset driver to run X11.
+   This will be one of the _xf86-video-*_ drivers for different video chipsets, such as Radeon, Nvidia,
+   Intel, and so forth. I install xf86-video-vmware by default.
 
-8. What desktop environment to you want (or what Window Manager)? I chose lightdm for
-   display manager and Cinnamon for desktop environment by default.  XFCE and Mate and
-   i3gaps are also some favorites of mine and are ready to be installed also.
+8. `DESKTOP=(cinnamon nemo-fileroller)`  Your choice.  Many options are available.  What desktop
+   environment to you want (or what Window Manager)? I chose lightdm for display manager and Cinnamon for
+   desktop environment by default.  XFCE and Mate and i3gaps are also some favorites of mine and are
+   ready to be installed also.
 
-9. Your LOCALE and TIME\_ZONE:  en\_US-UTF-8 and America/New York by default.  Keyboard is
-   also American English by default.
+9. Your `LOCALE` and `TIME\_ZONE`:  `en\_US-UTF-8` and `America/New York` by default.  Keyboard is
+   also `us` by default. `FILESYSTEM=ext4` by default.
 
 10. What packages you want.  I chose some default X11 goodies, printing utilities,
     multimedia packages, and some programming utilities.  I don't install Nano by

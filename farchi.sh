@@ -79,7 +79,6 @@ fi
 
 if $(efi_boot_mode) ; then
     EFI_SIZE=512M
-    #EFI_MTPT=/mnt/boot/efi
     unset BOOT_SIZE
 else
     unset EFI_SIZE; unset EFI_MTPT

@@ -57,7 +57,7 @@ You'll need to customize settings for your installation.
    ready to be installed also.  Feel free to alter your choices in `EXTRA_X` and the other arrays as
    you see fit.
 
-9. Your `LOCALE` and `TIME\_ZONE`:  `en\_US-UTF-8` and `America/New York` by default.  Keyboard is
+9. Your `LOCALE` and `TIME_ZONE`:  `en_US-UTF-8` and `America/New York` by default.  Keyboard is
    also `us` by default. `FILESYSTEM=ext4` by default.
 
 10. What packages you want.  I chose some default X11 goodies, printing utilities,
@@ -112,11 +112,11 @@ this script.
 
 ## post\_install.sh
 
-There is a _post\_install.sh_ script.  On my home network, I always have hosts that
-contain folders I need on my fresh new installation.  The names of the directories I need
-to recursively copy are installed in here.  Also, I install the AUR helper _yay_ in this
-script.  I also install _google-chrome_ and a few other things.  Hopefully this script
-will give you ideas for your installations.
+There is a _post\_install.sh_ script.  On my home network, I always have hosts that contain folders I
+need on my fresh new installation.  The names of the directories I need to recursively copy are installed
+in here.  (Such as my music library or my frequently used scripts of files.)  Also, I install the AUR
+helper _yay_ *or paru* in this script.  I also install _google-chrome_ and a few other things.  Hopefully
+this script will give you ideas for your installations.
 
 ## _farchi\_target.sh_ 
 

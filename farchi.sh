@@ -465,8 +465,8 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 # EDIT FSTAB IF NECESSARY
 clear
-echo && echo "Here's the new /etc/fstab..."; cat /mnt/etc/fstab
-echo && echo "Press any key to continue"; read edit_fstab
+echo && echo "Here's the new /etc/fstab...\n\n"; cat /mnt/etc/fstab
+echo && echo "\nPress any key to continue"; read edit_fstab
 
 
 ## SET UP TIMEZONE AND LOCALE

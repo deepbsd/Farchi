@@ -225,7 +225,7 @@ validate_pkgs(){
             fi
         done
     done
-    echo -e "\n" && read -p "Press any key to continue." empty
+    echo -e "\n" && read -p "Press any key to continue or Ctl-C to check for problem." empty
 }
 
 # ENCRYPT DISK WHEN POWER IS OFF

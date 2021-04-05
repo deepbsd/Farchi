@@ -28,8 +28,8 @@ ssh-add ~/.ssh/"$key_name"
 ## SYNC PACMAN DBs
 sudo pacman -Syy
 
-## INSTALL DVD SUPPORT, GKRELLM, MLOCATE
-sudo pacman -S libdvdread libdvdcss libdvdnav gkrellm mlocate fzf
+## INSTALL DVD SUPPORT, MLOCATE
+sudo pacman -S libdvdread libdvdcss libdvdnav mlocate fzf
 echo "updating locate database..."
 sudo updatedb
 

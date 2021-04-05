@@ -29,6 +29,7 @@ ssh-add ~/.ssh/"$key_name"
 sudo pacman -Syy
 
 ## INSTALL DVD SUPPORT, MLOCATE
+$(which gkrellm &>/dev/null) || sudo pacman -S gkrellm
 sudo pacman -S libdvdread libdvdcss libdvdnav mlocate fzf
 echo "updating locate database..."
 sudo updatedb

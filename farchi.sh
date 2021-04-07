@@ -406,6 +406,7 @@ sleep 4
 clear && count=5
 while true; do
     [[ "$count" -lt 1 ]] && break
+    echo -e "\n\n"
     echo -e  "\e[1A\e[K Launching install in $count seconds"
     count=$(( count - 1 ))
     sleep 1
@@ -413,7 +414,7 @@ done
 
 ##  check if reflector update is done...
 clear
-echo "Waiting until reflector has finished updating mirrorlist..."
+echo "\n\nWaiting until reflector has finished updating mirrorlist..."
 while true; do
     pgrep -x reflector &>/dev/null || break
     echo -n '.'
@@ -422,7 +423,7 @@ done
 
 ## CHECK CONNECTION TO INTERNET
 clear
-echo "Testing internet connection..."
+echo "\n\nTesting internet connection..."
 $(ping -c 3 archlinux.org &>/dev/null) || (echo "Not Connected to Network!!!" && exit 1)
 echo "Good!  We're connected!!!" && sleep 3
 
@@ -435,13 +436,13 @@ validate_pkgs
 
 ## CHECK TIME AND DATE BEFORE INSTALLATION
 timedatectl set-ntp true
-echo && echo "Date/Time service Status is . . . "
+echo && echo "\n\nDate/Time service Status is . . . "
 timedatectl status
 sleep 4
 
 ### PARTITION AND FORMAT AND MOUNT
 clear
-echo "Partitioning Hard Drive!! Press any key to continue..." ; read empty
+echo "\n\nPartitioning Hard Drive!! Press any key to continue..." ; read empty
 if $(use_lvm) ; then
     lvm_create
 else
@@ -451,22 +452,22 @@ fi
 
 ## INSTALL BASE SYSTEM
 clear
-echo && echo "Press any key to continue to install BASE SYSTEM..."; read empty
+echo && echo "\n\nPress any key to continue to install BASE SYSTEM..."; read empty
 pacstrap /mnt "${BASE_SYSTEM[@]}"
-echo && echo "Base system installed.  Press any key to continue..."; read empty
+echo && echo "\n\nBase system installed.  Press any key to continue..."; read empty
 
 ## UPDATE mkinitrd HOOKS if using LVM
 $(use_lvm) && arch-chroot /mnt pacman -S lvm2
 $(use_lvm) && lvm_hooks
 
 # GENERATE FSTAB
-echo "Generating fstab..."
+echo "\n\nGenerating fstab..."
 genfstab -U /mnt >> /mnt/etc/fstab
 
 # EDIT FSTAB IF NECESSARY
 clear
-echo && echo "Here's the new /etc/fstab...\n\n"; cat /mnt/etc/fstab
-echo && echo "\nPress any key to continue"; read edit_fstab
+echo && echo "\n\nHere's the new /etc/fstab...\n\n"; cat /mnt/etc/fstab
+echo && echo "\n\nPress any key to continue"; read edit_fstab
 
 
 ## SET UP TIMEZONE AND LOCALE

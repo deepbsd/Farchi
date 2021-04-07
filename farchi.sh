@@ -422,7 +422,7 @@ done
 
 ## CHECK CONNECTION TO INTERNET
 clear
-echo "\n\nTesting internet connection..."
+echo -e "\n\nTesting internet connection..."
 $(ping -c 3 archlinux.org &>/dev/null) || (echo "Not Connected to Network!!!" && exit 1)
 echo "Good!  We're connected!!!" && sleep 3
 
@@ -435,13 +435,13 @@ validate_pkgs
 
 ## CHECK TIME AND DATE BEFORE INSTALLATION
 timedatectl set-ntp true
-echo && echo "\n\nDate/Time service Status is . . . "
+echo && echo -e "\n\nDate/Time service Status is . . . "
 timedatectl status
 sleep 4
 
 ### PARTITION AND FORMAT AND MOUNT
 clear
-echo "\n\nPartitioning Hard Drive!! Press any key to continue..." ; read empty
+echo -e "\n\nPartitioning Hard Drive!! Press any key to continue..." ; read empty
 if $(use_lvm) ; then
     lvm_create
 else
@@ -451,46 +451,46 @@ fi
 
 ## INSTALL BASE SYSTEM
 clear
-echo && echo "\n\nPress any key to continue to install BASE SYSTEM..."; read empty
+echo && echo -e "\n\nPress any key to continue to install BASE SYSTEM..."; read empty
 pacstrap /mnt "${BASE_SYSTEM[@]}"
-echo && echo "\n\nBase system installed.  Press any key to continue..."; read empty
+echo && echo -e "\n\nBase system installed.  Press any key to continue..."; read empty
 
 ## UPDATE mkinitrd HOOKS if using LVM
 $(use_lvm) && arch-chroot /mnt pacman -S lvm2
 $(use_lvm) && lvm_hooks
 
 # GENERATE FSTAB
-echo "\n\nGenerating fstab..."
+echo -e "\n\nGenerating fstab..."
 genfstab -U /mnt >> /mnt/etc/fstab
 
 # EDIT FSTAB IF NECESSARY
 clear
-echo && echo "\n\nHere's the new /etc/fstab...\n\n"; cat /mnt/etc/fstab
-echo && echo "\n\nPress any key to continue"; read edit_fstab
+echo && echo -e "\n\nHere's the new /etc/fstab...\n\n"; cat /mnt/etc/fstab
+echo && echo -e "\n\nPress any key to continue"; read edit_fstab
 
 
 ## SET UP TIMEZONE AND LOCALE
 clear
-echo && echo "\n\nsetting timezone to $TIME_ZONE..."
+echo && echo -e "\n\nsetting timezone to $TIME_ZONE..."
 arch-chroot /mnt ln -sf /usr/share/zoneinfo/"$TIME_ZONE" /etc/localtime
 arch-chroot /mnt hwclock --systohc --utc
 arch-chroot /mnt date
-echo && echo "\n\nHere's the date info, hit any key to continue..."; read td_yn
+echo && echo -e "\n\nHere's the date info, hit any key to continue..."; read td_yn
 
 ## SET UP LOCALE
 clear
-echo && echo "\nsetting locale to $LOCALE ..."
+echo && echo -e "\nsetting locale to $LOCALE ..."
 arch-chroot /mnt sed -i "s/#$LOCALE/$LOCALE/g" /etc/locale.gen
 arch-chroot /mnt locale-gen
 echo "LANG=$LOCALE" > /mnt/etc/locale.conf
 export LANG="$LOCALE"
 cat /mnt/etc/locale.conf
-echo && echo "\n\nHere's your /mnt/etc/locale.conf. Type any key to continue."; read empty
+echo && echo -e "\n\nHere's your /mnt/etc/locale.conf. Type any key to continue."; read empty
 
 
 ## HOSTNAME
 clear
-echo && echo "\n\nSetting hostname..."; sleep 3
+echo && echo -e "\n\nSetting hostname..."; sleep 3
 echo "$HOSTNAME" > /mnt/etc/hostname
 
 cat > /mnt/etc/hosts <<HOSTS
@@ -499,12 +499,12 @@ cat > /mnt/etc/hosts <<HOSTS
 127.0.1.1      $HOSTNAME.localdomain     $HOSTNAME
 HOSTS
 
-echo && echo "\n\n/etc/hostname and /etc/hosts files configured..."
+echo && echo -e "\n\n/etc/hostname and /etc/hosts files configured..."
 echo "/etc/hostname . . . \n"
 cat /mnt/etc/hostname 
 echo "\n/etc/hosts . . .\n"
 cat /mnt/etc/hosts
-echo && echo "\n\nHere are /etc/hostname and /etc/hosts. Type any key to continue "; read empty
+echo && echo -e "\n\nHere are /etc/hostname and /etc/hosts. Type any key to continue "; read empty
 
 ## SET PASSWD
 clear
@@ -513,54 +513,54 @@ arch-chroot /mnt passwd
 
 ## INSTALLING MORE ESSENTIALS
 clear
-echo && echo "\n\nEnabling dhcpcd, pambase, sshd and NetworkManager services..." && echo
+echo && echo -e "\n\nEnabling dhcpcd, pambase, sshd and NetworkManager services..." && echo
 arch-chroot /mnt pacman -S git openssh networkmanager dhcpcd man-db man-pages pambase
 arch-chroot /mnt systemctl enable dhcpcd.service
 arch-chroot /mnt systemctl enable sshd.service
 arch-chroot /mnt systemctl enable NetworkManager.service
 arch-chroot /mnt systemctl enable systemd-homed
 
-echo && echo "\n\nPress any key to continue..."; read empty
+echo && echo -e "\n\nPress any key to continue..."; read empty
 
 ## ADD USER ACCT
 clear
-echo && echo "\n\nAdding sudo + user acct..."
+echo && echo -e "\n\nAdding sudo + user acct..."
 sleep 2
 arch-chroot /mnt pacman -S sudo bash-completion sshpass
 arch-chroot /mnt sed -i 's/# %wheel/%wheel/g' /etc/sudoers
 arch-chroot /mnt sed -i 's/%wheel ALL=(ALL) NOPASSWD: ALL/# %wheel ALL=(ALL) NOPASSWD: ALL/g' /etc/sudoers
-echo && echo "\n\nPlease provide a username: "; read sudo_user
-echo && echo "\n\nCreating $sudo_user and adding $sudo_user to sudoers..."
+echo && echo -e "\n\nPlease provide a username: "; read sudo_user
+echo && echo -e "\n\nCreating $sudo_user and adding $sudo_user to sudoers..."
 arch-chroot /mnt useradd -m -G wheel "$sudo_user"
-echo && echo "\n\nPassword for $sudo_user?"
+echo && echo -e "\n\nPassword for $sudo_user?"
 arch-chroot /mnt passwd "$sudo_user"
 
 ## INSTALL WIFI
 $(use_bcm4360) && arch-chroot /mnt pacman -S "$WIRELESSDRIVERS"
-[[ "$?" -eq 0 ]] && echo "\n\nWifi Driver successfully installed!"; sleep 5
+[[ "$?" -eq 0 ]] && echo -e "\n\nWifi Driver successfully installed!"; sleep 5
 
 ## INSTALL X AND DESKTOP  
 if $(install_x); then
-    clear && echo "\n\nInstalling X and X Extras and Video Driver. Type any key to continue"; read empty
+    clear && echo -e "\n\nInstalling X and X Extras and Video Driver. Type any key to continue"; read empty
     arch-chroot /mnt pacman -S "${BASIC_X[@]}"
     arch-chroot /mnt pacman -S "${EXTRA_X1[@]}"
     arch-chroot /mnt pacman -S "${EXTRA_X2[@]}"
     arch-chroot /mnt pacman -S "${EXTRA_X3[@]}"
     your_card=$(find_card)
-    echo "\n\n${your_card} and you're installing the $VIDEO_DRIVER driver... (Type key to continue) "; read blah
+    echo -e "\n\n${your_card} and you're installing the $VIDEO_DRIVER driver... (Type key to continue) "; read blah
     arch-chroot /mnt pacman -S "$VIDEO_DRIVER"
     arch-chroot /mnt pacman -S "${EXTRA_DESKTOPS[@]}"
     arch-chroot /mnt pacman -S "${GOODIES[@]}"
 
-    echo "\n\nEnabling display manager service..."
+    echo -e "\n\nEnabling display manager service..."
     arch-chroot /mnt systemctl enable ${DISPLAY_MGR[service]}
-    echo && echo "\n\nYour desktop and display manager should now be installed..."
+    echo && echo -e "\n\nYour desktop and display manager should now be installed..."
     sleep 5
 fi
 
 ## INSTALL GRUB
 clear
-echo "\n\nInstalling grub..." && sleep 4
+echo -e "\n\nInstalling grub..." && sleep 4
 arch-chroot /mnt pacman -S grub os-prober
 
 if $(efi_boot_mode) ; then
@@ -573,17 +573,17 @@ if $(efi_boot_mode) ; then
     [[ $? != 0 ]] && arch-chroot /mnt grub-install \
        "$IN_DEVICE" --target=x86_64-efi --bootloader-id=GRUB \
        --efi-directory=/boot/efi --no-nvram --removable
-    echo "\n\nefi grub bootloader installed..."
+    echo -e "\n\nefi grub bootloader installed..."
 else
     arch-chroot /mnt grub-install "$IN_DEVICE"
-    echo "\n\nmbr bootloader installed..."
+    echo -e "\n\nmbr bootloader installed..."
 fi
-echo "\n\nconfiguring /boot/grub/grub.cfg..."
+echo -e "\n\nconfiguring /boot/grub/grub.cfg..."
 arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
     
 
-echo "\n\nSystem should now be installed and ready to boot!!!"
-echo && echo "\nType shutdown -h now and remove Installation Media and then reboot"
+echo -e "\n\nSystem should now be installed and ready to boot!!!"
+echo && echo -e "\nType shutdown -h now and remove Installation Media and then reboot"
 echo && echo
 
 

@@ -501,9 +501,9 @@ cat > /mnt/etc/hosts <<HOSTS
 HOSTS
 
 echo && echo -e "\n\n/etc/hostname and /etc/hosts files configured..."
-echo "/etc/hostname . . . \n"
+echo -e "/etc/hostname . . . \n"
 cat /mnt/etc/hostname 
-echo "\n/etc/hosts . . .\n"
+echo -e "\n/etc/hosts . . .\n"
 cat /mnt/etc/hosts
 echo && echo -e "\n\nHere are /etc/hostname and /etc/hosts. Type any key to continue "; read empty
 

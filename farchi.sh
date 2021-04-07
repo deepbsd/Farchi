@@ -431,7 +431,7 @@ echo "Good!  We're connected!!!" && sleep 3
 ## Last chance for user to doublecheck his preferences
 show_prefs
 
-# Make sure current pkg names are correct
+# MAKE SURE CURRENT PKG NAMES ARE CORRECT
 validate_pkgs
 
 ## CHECK TIME AND DATE BEFORE INSTALLATION

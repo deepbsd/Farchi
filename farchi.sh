@@ -406,7 +406,6 @@ sleep 4
 clear && count=5
 while true; do
     [[ "$count" -lt 1 ]] && break
-    echo -e "\n\n"
     echo -e  "\e[1A\e[K Launching install in $count seconds"
     count=$(( count - 1 ))
     sleep 1

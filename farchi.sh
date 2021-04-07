@@ -15,9 +15,9 @@ efi_boot_mode(){
 }
 
 ### CHANGE ACCORDING TO PREFERENCE
-install_x(){ return 1; }     # return 0 if you want to install X
+install_x(){ return 0; }     # return 0 if you want to install X
 use_lvm(){ return 0; }       # return 0 if you want lvm
-use_crypt(){ return 1; }     # return 0 if you want crypt (NOT IMPLEMENTED YET)
+use_crypt(){ return 0; }     # return 0 if you want crypt (NOT IMPLEMENTED YET)
 use_bcm4360() { return 1; }  # return 0 if you want bcm4360
 use_nonus_keymap(){ return 1; } # return 0 if using non-US keyboard keymap (default)
 default_keymap='us'             # set to your keymap name
@@ -431,6 +431,7 @@ echo "Good!  We're connected!!!" && sleep 3
 ## Last chance for user to doublecheck his preferences
 show_prefs
 
+# Make sure current pkg names are correct
 validate_pkgs
 
 ## CHECK TIME AND DATE BEFORE INSTALLATION

@@ -152,6 +152,7 @@ error(){ echo "Error: $1" && exit 1; }
 
 show_prefs(){
     echo "Here are your preferences that will be installed: "
+    echo -e "\n\n"
     echo "HOSTNAME: ${HOSTNAME}  INSTALLATION DRIVE: ${IN_DEVICE}  DISKLABEL: ${DISKLABEL}"
     echo "TIMEZONE: ${TIME_ZONE}   LOCALE:  ${LOCALE}"
     echo "KEYBOARD: ${default_keymap}"

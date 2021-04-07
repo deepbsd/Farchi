@@ -413,7 +413,7 @@ done
 
 ##  check if reflector update is done...
 clear
-echo "\n\nWaiting until reflector has finished updating mirrorlist..."
+echo -e "\n\nWaiting until reflector has finished updating mirrorlist..."
 while true; do
     pgrep -x reflector &>/dev/null || break
     echo -n '.'

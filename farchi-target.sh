@@ -6,7 +6,7 @@
 ######     GLOBAL PREFERENCES   ##########
 ##########################################
 
-## Actual script begins around line 220 or so
+## Preferences can be set up to about line 150
 
 # VERIFY BOOT MODE
 efi_boot_mode(){
@@ -27,12 +27,15 @@ $(use_nonus_keymap()) && loadkeys "${default_keymap}"
 # Change according to your taste!
 HOSTNAME="archie1"
 
+# Change if not installing to a VM
 VIDEO_DRIVER="xf86-video-nouveau"
 
 #############################################################
 ##############    DISK DEVICES and SLICES   #################
 #############################################################
+
 IN_DEVICE=/dev/sda
+#IN_DEVICE=/dev/nvme0n0
 
 if $(efi_boot_mode) ; then
     DISKLABEL='GPT'
@@ -88,12 +91,11 @@ SWAP_SIZE=32G
 ROOT_SIZE=100G
 HOME_SIZE=    # Take whatever is left over after other partitions
 
-#( $(efi_boot_mode) && EFI_MTPT=/mnt/boot/efi ) || unset EFI_MTPT
-
 ##########################################################
 ######     TIMEZONE, LOCALE, KEYBOARD (assumes US),   ####
 ######     DESKTOP, WIFI DRIVER                       ####
 ##########################################################
+
 TIME_ZONE="America/New_York"
 LOCALE="en_US.UTF-8"
 FILESYSTEM=ext4
@@ -116,11 +118,15 @@ BASE_SYSTEM=( base base-devel linux linux-headers linux-firmware dkms vim iwd )
 BASIC_X=( xorg-server xorg-xinit mesa xorg-twm xterm gnome-terminal xfce4-terminal xorg-xclock "${DESKTOP[@]}" ${DISPLAY_MGR[dm]} firefox )
 
 ## These are your specific choices for fonts and wallpapers and X-related goodies
-EXTRA_X=( adobe-source-code-pro-fonts cantarell-fonts gnu-free-fonts noto-fonts breeze-gtk breeze-icons gtk-engine-murrine oxygen-icons xcursor-themes adapta-gtk-theme arc-gtk-theme elementary-icon-theme faenza-icon-theme gnome-icon-theme-extras arc-icon-theme lightdm-gtk-greeter-settings lightdm-webkit-theme-litarvan mate-icon-theme materia-gtk-theme papirus-icon-theme xcursor-bluecurve xcursor-premium archlinux-wallpaper deepin-community-wallpapers deepin-wallpapers elementary-wallpapers )
+EXTRA_X1=( adobe-source-code-pro-fonts cantarell-fonts gnu-free-fonts noto-fonts breeze-gtk breeze-icons gtk-engine-murrine oxygen-icons ) 
+
+EXTRA_X2=( xcursor-themes adapta-gtk-theme arc-gtk-theme elementary-icon-theme faenza-icon-theme gnome-icon-theme-extras arc-icon-theme lightdm-gtk-greeter-settings lightdm-webkit-theme-litarvan ) 
+
+EXTRA_X3=( mate-icon-theme materia-gtk-theme papirus-icon-theme xcursor-bluecurve xcursor-premium archlinux-wallpaper deepin-community-wallpapers deepin-wallpapers elementary-wallpapers )
 
 EXTRA_DESKTOPS=( mate mate-extra xfce4 xfce4-goodies i3-gaps i3status i3blocks nitrogen feh rofi dmenu terminator ttf-font-awesome ttf-ionicons )
 
-GOODIES=( htop neofetch screenfetch powerline powerline-fonts powerline-vim )
+GOODIES=( pamac pamac-tray htop neofetch screenfetch powerline powerline-fonts powerline-vim )
 
 ## -----------  Some of these are included, but it's all up to you...
 xfce_desktop=( xfce4 xfce4-goodies )
@@ -134,7 +140,7 @@ devel_stuff=( git nodejs npm npm-check-updates ruby )
 
 printing_stuff=( system-config-printer foomatic-db foomatic-db-engine gutenprint cups cups-pdf cups-filters cups-pk-helper ghostscript gsfonts )
 
-multimedia_stuff=( brasero sox cheese eog shotwell imagemagick sox cmus mpg123 alsa-utils cheese )
+multimedia_stuff=( simplescreenrecorder guvcview brasero sox eog shotwell imagemagick sox cmus mpg123 alsa-utils cheese )
 
 ##########################################
 ######       FUNCTIONS       #############
@@ -175,7 +181,6 @@ show_prefs(){
         echo "We ARE NOT installing X "
     fi
 
-
     echo "Type any key to continue or CTRL-C to exit..."
     read empty
 }
@@ -188,7 +193,7 @@ find_card(){
 
 format_it(){
     device=$1; fstype=$2
-    mkfs."$fstype" "$device" || error "can't format $device with $fstype"
+    mkfs."$fstype" "$device" || error "format_it(): can't format $device with $fstype"
 }
 
 mount_it(){
@@ -380,7 +385,6 @@ fi
 ## INSTALL BASE SYSTEM
 clear
 echo && echo "Press any key to continue to install BASE SYSTEM..."; read empty
-echo && echo "${BASE_SYSTEM[@]}"
 pacstrap /mnt "${BASE_SYSTEM[@]}"
 echo && echo "Base system installed.  Press any key to continue..."; read empty
 
@@ -415,7 +419,7 @@ arch-chroot /mnt locale-gen
 echo "LANG=$LOCALE" > /mnt/etc/locale.conf
 export LANG="$LOCALE"
 cat /mnt/etc/locale.conf
-echo && echo "Here's your /mnt/etc/locale.conf. Type any key to continue."; read loc_yn
+echo && echo "Here's your /mnt/etc/locale.conf. Type any key to continue."; read empty
 
 
 ## HOSTNAME
@@ -430,9 +434,11 @@ cat > /mnt/etc/hosts <<HOSTS
 HOSTS
 
 echo && echo "/etc/hostname and /etc/hosts files configured..."
+echo "/etc/hostname . . . "
 cat /mnt/etc/hostname 
+echo "/etc/hosts . . ."
 cat /mnt/etc/hosts
-echo && echo "Here are /etc/hostname and /etc/hosts. Type any key to continue "; read etchosts_yn
+echo && echo "Here are /etc/hostname and /etc/hosts. Type any key to continue "; read empty
 
 ## SET PASSWD
 clear
@@ -441,11 +447,12 @@ arch-chroot /mnt passwd
 
 ## INSTALLING MORE ESSENTIALS
 clear
-echo && echo "Enabling dhcpcd, sshd and NetworkManager services..." && echo
-arch-chroot /mnt pacman -S git openssh networkmanager dhcpcd man-db man-pages
+echo && echo "Enabling dhcpcd, pambase, sshd and NetworkManager services..." && echo
+arch-chroot /mnt pacman -S git openssh networkmanager dhcpcd man-db man-pages pambase
 arch-chroot /mnt systemctl enable dhcpcd.service
 arch-chroot /mnt systemctl enable sshd.service
 arch-chroot /mnt systemctl enable NetworkManager.service
+arch-chroot /mnt systemctl enable systemd-homed
 
 echo && echo "Press any key to continue..."; read empty
 
@@ -470,7 +477,9 @@ $(use_bcm4360) && arch-chroot /mnt pacman -S "$WIRELESSDRIVERS"
 if $(install_x); then
     clear && echo "Installing X and X Extras and Video Driver. Type any key to continue"; read empty
     arch-chroot /mnt pacman -S "${BASIC_X[@]}"
-    arch-chroot /mnt pacman -S "${EXTRA_X[@]}"
+    arch-chroot /mnt pacman -S "${EXTRA_X1[@]}"
+    arch-chroot /mnt pacman -S "${EXTRA_X2[@]}"
+    arch-chroot /mnt pacman -S "${EXTRA_X3[@]}"
     your_card=$(find_card)
     echo "${your_card} and you're installing the $VIDEO_DRIVER driver... (Type key to continue) "; read blah
     arch-chroot /mnt pacman -S "$VIDEO_DRIVER"
@@ -506,9 +515,6 @@ fi
 echo "configuring /boot/grub/grub.cfg..."
 arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
     
-arch-chroot /mnt pacman -S pambase systemd-homed
-arch-chroot /mnt systemctl enable systemd-homed
-
 echo "System should now be installed and ready to boot!!!"
 echo && echo "Type shutdown -h now and remove Installation Media and then reboot"
 echo && echo

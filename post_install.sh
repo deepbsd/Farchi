@@ -45,7 +45,7 @@ sudo updatedb
 $(which powerline >/dev/null) || sudo pacman -S powerline powerline-fonts
 
 ## INSTALL POWERLINE AND DEV STUFF 
-sudo pacman -S  ruby nodejs npm npm-check-updates gvim mlocate gkrellm
+sudo pacman -S  ruby nodejs npm npm-check-updates gvim mlocate 
 
 # NVM
 mkdir $HOME/.nvm

@@ -16,8 +16,15 @@ mkdir tmp repos build
 git clone https://github.com/deepbsd/dotfiles.git
 
 echo "Download home directory files from what host on network?"; read whathost
-#scp -o StrictHostKeyChecking=no -r dsj@"$whathost".lan:{adm,dotfiles,.vim,public_html,sounds,.gkrellm2,wallpaper,wallpaper1,bin,.ssh,.gnupg,Music} .
-scp -Br dsj@"$whathost".lan:{adm,.vim,public_html,sounds,.gkrellm2,wallpaper,wallpaper1,bin,.ssh,.gnupg,Music} .
+scp -o StrictHostKeyChecking=no -r dsj@"$whathost".lan:{adm,dotfiles,.vim,public_html,sounds,.gkrellm2,wallpaper,wallpaper1,bin,.ssh,.gnupg,Music} .
+#scp -Br dsj@"$whathost".lan:{adm,dotfiles,.vim,public_html,sounds,.gkrellm2,wallpaper,wallpaper1,bin,.ssh,.gnupg,Music} .
+
+## DOTFILES
+cp ~/.bashrc ~/.bashrc.orig
+cp ~/.bash_profile ~/.bash_profile.orig
+ln -sf ~/dotfiles/.bashrc .
+ln -sf ~/dotfiles/.bash_profile .
+ln -sf ~/dotfiles/.vimrc .
 
 # SSH-AGENT SERVICE
 echo "Start the ssh-agent service..."
@@ -37,19 +44,8 @@ sudo updatedb
 ## INSTALL POWERLINE
 $(which powerline >/dev/null) || sudo pacman -S powerline powerline-fonts
 
-## CHECK FOR OLD FAITHFULS
-$(which gkrellm) || sudo pacman -S gkrellm
-[[ -f /opt/anaconda/bin/anaconda-navigator ]] || yay -S anaconda
-
 ## INSTALL POWERLINE AND DEV STUFF 
 sudo pacman -S  ruby nodejs npm npm-check-updates gvim mlocate gkrellm
-
-## DOTFILES
-cp ~/.bashrc ~/.bashrc.orig
-cp ~/.bash_profile ~/.bash_profile.orig
-ln -sf ~/dotfiles/.bashrc .
-ln -sf ~/dotfiles/.bash_profile .
-ln -sf ~/dotfiles/.vimrc .
 
 # NVM
 mkdir $HOME/.nvm
@@ -63,6 +59,9 @@ git clone https://aur.archlinux.org/yay-git.git
 cd yay-git
 makepkg -si
 cd
+
+## CHECK ANACONDA
+[[ -f /opt/anaconda/bin/anaconda-navigator ]] || yay -S anaconda
 
 ##  Start using paru...
 yay -S paru

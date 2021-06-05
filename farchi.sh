@@ -95,8 +95,8 @@ HOME_SIZE=    # Take whatever is left over after other partitions
 ####   DISPLAY MGR, WIFI DRIVER
 ####################################################
 
-#TIME_ZONE="America/New_York"
 TIME_ZONE="$(wget -qO - http://geoip.ubuntu.com/lookup | sed -n -e 's/.*<TimeZone>\(.*\)<\/TimeZone>.*/\1/p')"
+TIME_ZONE=${TIME_ZONE:="America/New_York"}   # Set a default value
 LOCALE="en_US.UTF-8"
 FILESYSTEM=ext4
 DESKTOP=('cinnamon' 'nemo-fileroller' 'lightdm-gtk-greeter')

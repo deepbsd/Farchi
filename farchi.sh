@@ -548,6 +548,9 @@ if $(install_x); then
     arch-chroot /mnt pacman -S "${EXTRA_X1[@]}"
     arch-chroot /mnt pacman -S "${EXTRA_X2[@]}"
     arch-chroot /mnt pacman -S "${EXTRA_X3[@]}"
+    arch-chroot /mnt pacman -S "${multimedia_stuff[@]}"
+    arch-chroot /mnt pacman -S "${printing_stuff[@]}"
+    arch-chroot /mnt pacman -S "${devel_stuff[@]}"
     your_card=$(find_card)
     echo -e "\n\n${your_card} and you're installing the $VIDEO_DRIVER driver... (Type key to continue) "; read blah
     arch-chroot /mnt pacman -S "$VIDEO_DRIVER"

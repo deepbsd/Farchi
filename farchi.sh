@@ -112,7 +112,7 @@ fi
 #####  SOFTWARE SETS: X, EXTRA_X, DESKTOPS  ######
 ##################################################
 
-BASE_SYSTEM=( base base-devel linux linux-headers linux-firmware dkms vim iwd )
+BASE_SYSTEM=( base base-devel linux linux-headers linux-firmware dkms vim iwd archlinux-keyring )
 
 ## These are packages required for a working Xorg desktop
 BASIC_X=( xorg-server xorg-xinit mesa xorg-twm xterm gnome-terminal xfce4-terminal xorg-xclock "${DESKTOP[@]}" ${DISPLAY_MGR[dm]} firefox )
@@ -135,6 +135,14 @@ mate_desktop=( mate mate-extra )
 
 i3gaps_desktop=( i3-gaps dmenu feh rofi i3status i3blocks nitrogen i3status ttf-font-awesome ttf-ionicons )
 
+qtile_desktop=( qtile dmenu feh rofi nitrogen ttf-font-awesome ttf-ionicons "${multimedia_stuff[@]}" )
+
+xmonad_desktop=( xmonad xmonad-contrib )
+
+awesome_desktop=( awesome vicious )
+
+kde_desktop=( plasma plasma-wayland-session kde-applications )
+
 ## Python3 should be installed by default
 devel_stuff=( git nodejs npm npm-check-updates ruby )
 
@@ -142,7 +150,7 @@ printing_stuff=( system-config-printer foomatic-db foomatic-db-engine gutenprint
 
 multimedia_stuff=( brasero sox eog shotwell imagemagick cmus mpg123 alsa-utils cheese )
 
-all_pkgs=( BASE_SYSTEM BASIC_X EXTRA_X1 EXTRA_X2 EXTRA_X3 EXTRA_DESKTOPS GOODIES xfce_desktop mate_desktop i3gaps_desktop devel_stuff printing_stuff multimedia_stuff )
+all_pkgs=( BASE_SYSTEM BASIC_X EXTRA_X1 EXTRA_X2 EXTRA_X3 EXTRA_DESKTOPS GOODIES xfce_desktop mate_desktop i3gaps_desktop devel_stuff printing_stuff multimedia_stuff qtile_desktop xmonad_desktop awesome_desktop kde_desktop)
 
 ##########################################
 ######       FUNCTIONS       #############

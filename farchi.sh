@@ -21,6 +21,8 @@ use_crypt(){ return 0; }     # return 0 if you want crypt
 use_bcm4360() { return 1; }  # return 0 if you want bcm4360
 use_nonus_keymap(){ return 1; } # return 0 if using non-US keyboard keymap (default)
 default_keymap='us'             # set to your keymap name
+DISKLABEL='GPT'
+EFI_MTPT=/mnt/boot/efi
 
 $(use_nonus_keymap()) && loadkeys "${default_keymap}"
 
@@ -39,8 +41,6 @@ IN_DEVICE=/dev/sda
 
 # If IN_DEV is nvme then slices are p1, p2 etc
 if  $(efi_boot_mode) ; then
-    DISKLABEL='GPT'
-    EFI_MTPT=/mnt/boot/efi
     if [[ $IN_DEVICE =~ nvme ]]; then
         EFI_DEVICE="${IN_DEVICE}p1"   # NOT for MBR systems
         ROOT_DEVICE="${IN_DEVICE}p2"  # only for non-LVM

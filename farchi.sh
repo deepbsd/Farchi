@@ -24,6 +24,13 @@ default_keymap='us'             # set to your keymap name
 DISKLABEL='GPT'
 EFI_MTPT=/mnt/boot/efi
 
+## Change these for YOUR installation.  I'm using a 30G VM
+SWAP_SIZE=4G
+ROOT_SIZE=13G
+HOME_SIZE=    # Take whatever is left over after other partitions
+
+
+### Change keymap if necessary
 $(use_nonus_keymap()) && loadkeys "${default_keymap}"
 
 # Change according to your taste!
@@ -85,10 +92,6 @@ else
     BOOT_SIZE=512M
 fi
 
-## Change these for YOUR installation.  I'm using a 30G VM
-SWAP_SIZE=4G
-ROOT_SIZE=13G
-HOME_SIZE=    # Take whatever is left over after other partitions
 
 ####################################################
 ####   LOCALE, TIMEZONE, FILESYSTEM, DESKTOP ENV,
@@ -148,7 +151,7 @@ devel_stuff=( git nodejs npm npm-check-updates ruby )
 
 printing_stuff=( system-config-printer foomatic-db foomatic-db-engine gutenprint cups cups-pdf cups-filters cups-pk-helper ghostscript gsfonts )
 
-multimedia_stuff=( brasero sox eog shotwell imagemagick cmus mpg123 alsa-utils cheese )
+multimedia_stuff=( atril brasero sox eog shotwell imagemagick cmus mpg123 alsa-utils cheese )
 
 all_pkgs=( BASE_SYSTEM BASIC_X EXTRA_X1 EXTRA_X2 EXTRA_X3 EXTRA_DESKTOPS GOODIES xfce_desktop mate_desktop i3gaps_desktop devel_stuff printing_stuff multimedia_stuff qtile_desktop xmonad_desktop awesome_desktop kde_desktop)
 

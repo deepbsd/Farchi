@@ -17,7 +17,7 @@ efi_boot_mode(){
 ### CHANGE ACCORDING TO PREFERENCE
 install_x(){ return 0; }     # return 0 if you want to install X
 use_lvm(){ return 0; }       # return 0 if you want lvm
-use_crypt(){ return 0; }     # return 0 if you want crypt 
+use_crypt(){ return 1; }     # return 0 if you want crypt 
 use_bcm4360() { return 1; }  # return 0 if you want bcm4360
 use_nonus_keymap(){ return 1; } # return 0 if using non-US keyboard keymap (default)
 default_keymap='us'             # set to your keymap name
@@ -34,7 +34,7 @@ HOME_SIZE=    # Take whatever is left over after other partitions
 $(use_nonus_keymap()) && loadkeys "${default_keymap}"
 
 # Change according to your taste!
-HOSTNAME="effie1"
+HOSTNAME="farchi"
 
 # Change if not installing to a VM
 VIDEO_DRIVER="xf86-video-vmware"
@@ -123,9 +123,9 @@ BASIC_X=( xorg-server xorg-xinit mesa xorg-twm xterm gnome-terminal xfce4-termin
 ## These are your specific choices for fonts and wallpapers and X-related goodies
 EXTRA_X1=( adobe-source-code-pro-fonts cantarell-fonts gnu-free-fonts noto-fonts breeze-gtk breeze-icons gtk-engine-murrine oxygen-icons ) 
 
-EXTRA_X2=( xcursor-themes adapta-gtk-theme arc-gtk-theme elementary-icon-theme faenza-icon-theme gnome-icon-theme-extras arc-icon-theme lightdm-gtk-greeter-settings lightdm-webkit-theme-litarvan ) 
+EXTRA_X2=( xcursor-themes adapta-gtk-theme arc-gtk-theme elementary-icon-theme gnome-icon-theme-extras arc-icon-theme lightdm-gtk-greeter-settings lightdm-webkit-theme-litarvan ) 
 
-EXTRA_X3=( mate-icon-theme materia-gtk-theme papirus-icon-theme xcursor-bluecurve xcursor-premium archlinux-wallpaper deepin-community-wallpapers deepin-wallpapers elementary-wallpapers )
+EXTRA_X3=( mate-icon-theme materia-gtk-theme papirus-icon-theme xcursor-bluecurve archlinux-wallpaper deepin-community-wallpapers deepin-wallpapers elementary-wallpapers )
 
 EXTRA_DESKTOPS=( mate mate-extra xfce4 xfce4-goodies i3-gaps i3status i3blocks nitrogen feh rofi dmenu terminator ttf-font-awesome ttf-ionicons )
 

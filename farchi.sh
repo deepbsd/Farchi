@@ -410,6 +410,18 @@ EOF
     echo "LVs created and mounted. Press any key."; read empty;
 }
 
+# INSTALL XTRA DESKTOPS FOR X
+xtra_desktops(){
+    echo "Want to install extra desktops?" && read desktop_choice
+    if [[ "${desktop_choice}" =~ 'y' ]] ; then
+        arch-chroot /mnt pacman -S "${EXTRA_DESKTOPS[@]}"
+    else 
+        echo "Not installing Extra Desktops..."
+        sleep 5
+        return 0
+    fi
+
+}
 
 ##########################################
 ##        SCRIPT STARTS HERE
@@ -568,8 +580,11 @@ if $(install_x); then
     your_card=$(find_card)
     echo -e "\n\n${your_card} and you're installing the $VIDEO_DRIVER driver... (Type key to continue) "; read blah
     arch-chroot /mnt pacman -S "$VIDEO_DRIVER"
-    arch-chroot /mnt pacman -S "${EXTRA_DESKTOPS[@]}"
     arch-chroot /mnt pacman -S "${GOODIES[@]}"
+
+    # ASK WHETHER TO INSTALL XTRA DESKTOPS...
+    xtra_desktops 
+    
 
     echo -e "\n\nEnabling display manager service..."
     arch-chroot /mnt systemctl enable ${DISPLAY_MGR[service]}

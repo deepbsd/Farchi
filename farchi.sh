@@ -125,7 +125,7 @@ EXTRA_X1=( adobe-source-code-pro-fonts cantarell-fonts gnu-free-fonts noto-fonts
 
 EXTRA_X2=( xcursor-themes adapta-gtk-theme arc-gtk-theme elementary-icon-theme gnome-icon-theme-extras arc-icon-theme lightdm-gtk-greeter-settings lightdm-webkit-theme-litarvan ) 
 
-EXTRA_X3=( mate-icon-theme materia-gtk-theme papirus-icon-theme xcursor-bluecurve archlinux-wallpaper deepin-community-wallpapers deepin-wallpapers elementary-wallpapers )
+EXTRA_X3=( mate-icon-theme materia-gtk-theme papirus-icon-theme archlinux-wallpaper deepin-community-wallpapers deepin-wallpapers elementary-wallpapers )
 
 EXTRA_DESKTOPS=( mate mate-extra xfce4 xfce4-goodies i3-gaps i3status i3blocks nitrogen feh rofi dmenu terminator ttf-font-awesome ttf-ionicons )
 

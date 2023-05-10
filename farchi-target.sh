@@ -25,7 +25,7 @@ default_keymap='us'             # set to your keymap name
 $(use_nonus_keymap()) && loadkeys "${default_keymap}"
 
 # Change according to your taste!
-HOSTNAME="archie1"
+HOSTNAME="farchie1"
 
 # Change if not installing to a VM
 VIDEO_DRIVER="xf86-video-nouveau"
@@ -87,8 +87,8 @@ else
 fi
 
 ## Change these for YOUR installation.  I'm using a 30G VM
-SWAP_SIZE=32G
-ROOT_SIZE=100G
+SWAP_SIZE=4G
+ROOT_SIZE=15G
 HOME_SIZE=    # Take whatever is left over after other partitions
 
 ##########################################################
@@ -255,7 +255,9 @@ lvm_hooks(){
     clear
     echo "add lvm2 to mkinitcpio hooks HOOKS=( base udev ... block lvm2 filesystems )"
     sleep 4
-    vim /mnt/etc/mkinitcpio.conf
+    pacman -Qi lvm2 || pacman -S lvm2
+    sleep 6
+    sed -i 's/^\(HOOKS=["(]base .*\) filesystems \(.*\)$/\1 lvm2 filesystems \2/g' /mnt/etc/mkinitcpio.conf
     arch-chroot /mnt mkinitcpio -P
     echo "Press any key to continue..."; read empty
 }

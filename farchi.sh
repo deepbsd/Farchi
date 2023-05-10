@@ -420,8 +420,32 @@ xtra_desktops(){
         sleep 5
         return 0
     fi
-
 }
+
+## INSTALL PARU
+install_paru(){
+    if $( $USER == 'dsj' ); then 
+        $( pacman -Qi paru ) && echo "Paru already installed!!" && sleep 4 && return 0 
+        echo "Installing paru: "
+        [ -d $HOME/build ] || mkdir $HOME/build
+        cd $HOME/build
+        git clone https://aur.archlinux.org/paru.git
+        cd paru
+        makepkg -si
+        ( [ "$?" == 0 ] && echo "Paru build successful!!" ) || echo "Problem with building Paru!!!"
+        cd  # return to $HOME
+        return 0
+    else
+        echo "'Sorry, you're not dsj!! "
+        return 1
+    fi
+}
+
+## INSTALL PARU AS SUDO USER
+su_install_paru(){
+    su -c install_paru "$sudo_user"
+}
+
 
 ##########################################
 ##        SCRIPT STARTS HERE
@@ -615,6 +639,13 @@ fi
 echo -e "\n\nconfiguring /boot/grub/grub.cfg..."
 arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
     
+## INSTALL PARU AS SUDO USER
+echo "Want to install paru as sudo user?"; read paru_answer
+if [[ "$paru_answer" =~ [yY] ]]; then
+    su_install_paru "$sudo_user"
+else
+    echo "Not installing paru..."
+fi
 
 echo -e "\n\nSystem should now be installed and ready to boot!!!"
 echo && echo -e "\nType shutdown -h now and remove Installation Media and then reboot"

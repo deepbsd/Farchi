@@ -332,6 +332,41 @@ EOF
     echo "LVs created and mounted. Press any key."; read empty;
 }
 
+# INSTALL XTRA DESKTOPS FOR X
+xtra_desktops(){
+    echo "Want to install extra desktops?" && read desktop_choice
+    if [[ "${desktop_choice}" =~ 'y' ]] ; then
+        arch-chroot /mnt pacman -S "${EXTRA_DESKTOPS[@]}"
+    else 
+        echo "Not installing Extra Desktops..."
+        sleep 5
+        return 0
+    fi
+}
+
+## INSTALL PARU
+install_paru(){
+    if $( $USER == 'dsj' ); then 
+        $( pacman -Qi paru ) && echo "Paru already installed!!" && sleep 4 && return 0 
+        echo "Installing paru: "
+        [ -d $HOME/build ] || mkdir $HOME/build
+        cd $HOME/build
+        git clone https://aur.archlinux.org/paru.git
+        cd paru
+        makepkg -si
+        ( [ "$?" == 0 ] && echo "Paru build successful!!" ) || echo "Problem with building Paru!!!"
+        cd  # return to $HOME
+        return 0
+    else
+        echo "'Sorry, you're not dsj!! "
+        return 1
+    fi
+}
+
+## INSTALL PARU AS SUDO USER
+su_install_paru(){
+    su -c install_paru "$sudo_user"
+}
 
 ##########################################
 ##        SCRIPT STARTS HERE
@@ -488,6 +523,10 @@ if $(install_x); then
     arch-chroot /mnt pacman -S "${EXTRA_DESKTOPS[@]}"
     arch-chroot /mnt pacman -S "${GOODIES[@]}"
 
+    # ASK WHETHER TO INSTALL XTRA DESKTOPS...
+    xtra_desktops 
+
+
     echo "Enabling display manager service..."
     arch-chroot /mnt systemctl enable ${DISPLAY_MGR[service]}
     echo && echo "Your desktop and display manager should now be installed..."
@@ -516,6 +555,14 @@ else
 fi
 echo "configuring /boot/grub/grub.cfg..."
 arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
+
+## INSTALL PARU AS SUDO USER
+echo "Want to install paru as sudo user?"; read paru_answer
+if [[ "$paru_answer" =~ [yY] ]]; then
+    su_install_paru "$sudo_user"
+else
+    echo "Not installing paru..."
+fi
     
 echo "System should now be installed and ready to boot!!!"
 echo && echo "Type shutdown -h now and remove Installation Media and then reboot"

@@ -642,7 +642,9 @@ arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 ## INSTALL PARU AS SUDO USER
 echo "Want to install paru as sudo user?"; read paru_answer
 if [[ "$paru_answer" =~ [yY] ]]; then
+    echo "Installing PARU..."
     su_install_paru "$sudo_user"
+    ( [[ "$?" == 0 ]] && echo "PARU Installed..." ) || echo "Paru not installed..."
 else
     echo "Not installing paru..."
 fi

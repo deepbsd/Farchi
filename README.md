@@ -104,6 +104,8 @@ try out some other customizations for your own needs.  Hopefully `simplest.sh` c
 steps!  I never have found RAID very useful for my needs, but many people have.  But you'll have to add
 that feature yourself, since I don't have it by default.
 
+I think I should just change this over to a UEFI BIOS and GPT disk scheme.  Have to work on this.
+
 ## install\_x.sh
 
 If you decide to NOT install X11, there is an additional _install\_x.sh_ script.  The

@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
 ##  This is the simplest possible Arch Linux install script I think...
-HOSTNAME="marbie1"
+HOSTNAME="archie"
 #VIDEO_DRIVER="xf86-video-vmware"
 IN_DEVICE=/dev/sda
+#IN_DEVICE=/dev/nvme0n1
 BOOT_DEVICE="${IN_DEVICE}1"
 ROOT_DEVICE="${IN_DEVICE}2"
 SWAP_DEVICE="${IN_DEVICE}3"

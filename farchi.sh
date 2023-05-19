@@ -98,7 +98,7 @@ fi
 ####   DISPLAY MGR, WIFI DRIVER
 ####################################################
 
-TIME_ZONE="$(wget -qO - http://geoip.ubuntu.com/lookup | sed -n -e 's/.*<TimeZone>\(.*\)<\/TimeZone>.*/\1/p')"
+# TIME_ZONE="$(wget -qO - http://geoip.ubuntu.com/lookup | sed -n -e 's/.*<TimeZone>\(.*\)<\/TimeZone>.*/\1/p')"
 TIME_ZONE=${TIME_ZONE:="America/New_York"}   # Set a default value
 LOCALE="en_US.UTF-8"
 FILESYSTEM=ext4
@@ -331,7 +331,6 @@ lvm_hooks(){
     pacman -Qi lvm2 || pacman -S lvm2
     sleep 6
     sed -i 's/^\(HOOKS=["(]base .*\) filesystems \(.*\)$/\1 lvm2 filesystems \2/g' /mnt/etc/mkinitcpio.conf
-    #sed -i 's/^HOOKS=(base udev autodetect modconf block filesystems keyboard fsck)$/HOOKS=(base udev autodetect modconf block lvm2 filesystems keyboard fsck)/g' /mnt/etc/mkinitcpio.conf
     arch-chroot /mnt mkinitcpio -P
     echo "Press any key to continue..."; read empty
 }

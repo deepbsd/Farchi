@@ -15,7 +15,7 @@ Good luck!
 
 You'll need to customize settings for your installation.
 
-## Here's What You'll Want to Change
+## Here's What You'll Want to Change:
 
 1. `HOSTNAME=effie1`  Your hostname
 
@@ -95,6 +95,9 @@ And about a million other little tiny rules that still bite me in the butt every
 Hope you have fun!
 
 ## simplest.sh
+
+Currently this only works on a non-UEFI bios.  I will have to change this.  Time marches on and
+conditions were different when I first wrote this script.
 
 This is a starter script for your own script.  It has the bare essentials for installing your own MBR-based
 installation.  The same "you'll need to change" fules apply.  But this is a simpler script to start

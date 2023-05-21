@@ -421,28 +421,19 @@ xtra_desktops(){
     fi
 }
 
-## INSTALL PARU
+## INSTALL PARU (ROOT as SUDO USER)
+#
+# Change to $sudo_user eventually
 install_paru(){
-    if $( $USER == 'dsj' ); then 
-        $( pacman -Qi paru ) && echo "Paru already installed!!" && sleep 4 && return 0 
-        echo "Installing paru: "
-        [ -d $HOME/build ] || mkdir $HOME/build
-        cd $HOME/build
-        git clone https://aur.archlinux.org/paru.git
-        cd paru
-        makepkg -si
-        ( [ "$?" == 0 ] && echo "Paru build successful!!" ) || echo "Problem with building Paru!!!"
-        cd  # return to $HOME
-        return 0
-    else
-        echo "'Sorry, you're not dsj!! "
-        return 1
-    fi
-}
-
-## INSTALL PARU AS SUDO USER
-su_install_paru(){
-    su -c install_paru "$sudo_user"
+    cd /mnt/home/dsj
+    [ -d $HOME/build ] || su -c "mkdir $HOME/build" dsj
+    cd $HOME/build
+    su -c "git clone https://aur.archlinux.org/paru.git" dsj
+    cd paru
+    su -c "makepkg -si" dsj
+    ( [ "$?" == 0 ] && echo "Paru build successful!!" ) || echo "Problem building Paru!!!"
+    sleep 4
+    pacman -Qi paru
 }
 
 

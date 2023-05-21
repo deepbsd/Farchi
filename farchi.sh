@@ -422,15 +422,14 @@ xtra_desktops(){
 }
 
 ## INSTALL PARU (ROOT as SUDO USER)
-#
-# Change to $sudo_user eventually
 install_paru(){
-    cd /mnt/home/dsj
-    [ -d $HOME/build ] || su -c "mkdir $HOME/build" dsj
+    # $1 will be the sudo user in question
+    cd /mnt/home/$1
+    [ -d $HOME/build ] || su -c "mkdir $HOME/build" $1
     cd $HOME/build
-    su -c "git clone https://aur.archlinux.org/paru.git" dsj
+    su -c "git clone https://aur.archlinux.org/paru.git" $1
     cd paru
-    su -c "makepkg -si" dsj
+    su -c "makepkg -si" $1
     ( [ "$?" == 0 ] && echo "Paru build successful!!" ) || echo "Problem building Paru!!!"
     sleep 4
     pacman -Qi paru
@@ -633,7 +632,7 @@ arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 echo "Want to install paru as sudo user?"; read paru_answer
 if [[ "$paru_answer" =~ [yY] ]]; then
     echo "Installing PARU..."
-    su_install_paru "$sudo_user"
+    install_paru "$sudo_user"
     ( [[ "$?" == 0 ]] && echo "PARU Installed..." ) || echo "Paru not installed..."
 else
     echo "Not installing paru..."

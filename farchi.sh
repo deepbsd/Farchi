@@ -423,6 +423,9 @@ xtra_desktops(){
 
 ## INSTALL PARU (ROOT as SUDO USER)
 install_paru(){
+    # check if paru is already installed
+    $( pacman -Qi paru ) && echo "paru already installed!" && return 0
+
     # $1 will be the sudo user in question
     cd /mnt/home/$1
     [ -d $HOME/build ] || su -c "mkdir $HOME/build" $1

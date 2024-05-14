@@ -31,7 +31,9 @@ HOME_SIZE=    # Take whatever is left over after other partitions
 
 
 ### Change keymap if necessary
-$(use_nonus_keymap()) && loadkeys "${default_keymap}"
+if use_nonus_keymap; then
+    loadkeys "${default_keymap}"
+fi
 
 # Change according to your taste!
 HOSTNAME="farchi"

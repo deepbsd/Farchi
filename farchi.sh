@@ -18,15 +18,15 @@ efi_boot_mode(){
 install_x(){ return 0; }     # return 0 if you want to install X
 use_lvm(){ return 0; }       # return 0 if you want lvm
 use_crypt(){ return 1; }     # return 0 if you want crypt 
-use_bcm4360() { return 1; }  # return 0 if you want bcm4360
+use_bcm4360() { return 0; }  # return 0 if you want bcm4360
 use_nonus_keymap(){ return 1; } # return 0 if using non-US keyboard keymap (default)
 default_keymap='us'             # set to your keymap name
 DISKLABEL='GPT'
 EFI_MTPT=/mnt/boot/efi
 
 ## Change these for YOUR installation.  I'm using a 30G VM
-SWAP_SIZE=4G
-ROOT_SIZE=13G
+SWAP_SIZE=64G
+ROOT_SIZE=100G
 HOME_SIZE=    # Take whatever is left over after other partitions
 
 
@@ -34,10 +34,10 @@ HOME_SIZE=    # Take whatever is left over after other partitions
 $(use_nonus_keymap) && loadkeys "${default_keymap}"
 
 # Change according to your taste!
-HOSTNAME="farchi"
+HOSTNAME="pumpkin"
 
 # Change if not installing to a VM
-VIDEO_DRIVER="xf86-video-vmware"
+VIDEO_DRIVER="xf86-video-nouveau"
 
 ###################################################
 ################ PARTITION NAMES ##################

@@ -25,8 +25,8 @@ DISKLABEL='GPT'
 EFI_MTPT=/mnt/boot/efi
 
 ## Change these for YOUR installation.  I'm using a 30G VM
-SWAP_SIZE=64G
-ROOT_SIZE=100G
+SWAP_SIZE=4G
+ROOT_SIZE=14G
 HOME_SIZE=    # Take whatever is left over after other partitions
 
 
